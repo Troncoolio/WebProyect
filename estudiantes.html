@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CBT19 - ESTUDIANTES</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/styles/stylesestudiantes.css">
+</head>
+<body>
+
+    <div id="loader" class="loader-wrapper"><div class="loader"></div></div>
+    <div id="overlay" onclick="closeSidebar()"></div>
+    <button class="toggle-sidebar" onclick="toggleSidebar()" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+
+    <aside class="sidebar" data-aos="fade-right" role="navigation">
+        <header><h1>CBTA19</h1></header>
+        <nav>
+            <a href="#" class="active" data-section="inicio" aria-current="page"><span class="material-symbols-outlined">home</span>Inicio</a>
+            <a href="#" data-section="perfil"><span class="material-symbols-outlined">person</span>Perfil</a>
+            <a href="#" data-section="calificaciones"><span class="material-symbols-outlined">bar_chart</span>Calificaciones</a>
+            <a href="#" data-section="horario"><span class="material-symbols-outlined">calendar_view_week</span>Horario Semanal</a>
+            <a href="#" data-section="calendario"><span class="material-symbols-outlined">calendar_month</span>Calendario Anual</a>
+            <a href="#" data-section="notificaciones" style="position: relative;"><span class="material-symbols-outlined">notifications</span>Notificaciones <span id="notification-badge" class="notification-badge" style="display: none;"></span></a>
+            <a href="#" data-section="reinscripciones"><span class="material-symbols-outlined">school</span>Reinscripciones</a>
+            <a href="#" data-section="pagos"><span class="material-symbols-outlined">payment</span>Pagos</a>
+            <a href="#" class="submenu-toggle" onclick="toggleSubmenu(event)" aria-haspopup="true" aria-expanded="false"><span class="material-symbols-outlined">settings</span>Opciones</a>
+            <div class="submenu">
+                <a href="#" onclick="toggleDarkMode()"><span class="material-symbols-outlined">dark_mode</span>Modo oscuro</a>
+                <a href="#" data-section="ayuda"><span class="material-symbols-outlined">help</span>Ayuda</a>
+                <a href="#" id="logoutBtn"><span class="material-symbols-outlined">logout</span>Cerrar Sesión</a>
+            </div>
+        </nav>
+        <footer>© 2025 CBTA19</footer>
+    </aside>
+
+    <main class="main">
+        <section id="inicio" class="content-section">
+            <div class="greeting" data-aos="fade-down">
+                <h2>Hola, Lucas 👋</h2>
+                <p>Nos alegra verte de nuevo. Aquí tienes un resumen de tu día.</p>
+            </div>
+            <div class="inicio-grid">
+                <div class="card" data-aos="fade-up">
+                    <h3><span class="material-symbols-outlined">schedule</span>Horario de hoy</h3>
+                    <table class="schedule-table">
+                        <thead><tr><th>Hora</th><th>Materia</th></tr></thead>
+                        <tbody id="today-schedule-body">
+                        </tbody>
+                    </table>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                    <div class="card grades-list" data-aos="fade-up" data-aos-delay="100">
+                        <h3><span class="material-symbols-outlined">school</span>Últimas calificaciones</h3>
+                        <div class="row"><div class="label">Matemáticas</div><div class="bar"><div class="fill" data-fill="88%"></div></div><div class="value">88</div></div>
+                        <div class="row"><div class="label">Historia</div><div class="bar"><div class="fill" data-fill="92%"></div></div><div class="value">92</div></div>
+                        <div class="row"><div class="label">Biología</div><div class="bar"><div class="fill" data-fill="97%"></div></div><div class="value">97</div></div>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-delay="200">
+                        <h3><span class="material-symbols-outlined">task_alt</span>Próximas Entregas</h3>
+                        <ul class="deadline-list">
+                            <li class="deadline-item">
+                                <div class="deadline-date"><span class="month">SEP</span><span class="day">15</span></div>
+                                <div><strong>Proyecto de Física</strong><br><small>Entrega final del circuito</small></div>
+                            </li>
+                            <li class="deadline-item">
+                                <div class="deadline-date"><span class="month">SEP</span><span class="day">18</span></div>
+                                <div><strong>Ensayo de Historia</strong><br><small>Revolución Industrial</small></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                    <div class="card" data-aos="fade-up" data-aos-delay="300">
+                        <h3><span class="material-symbols-outlined">explore</span>Acceso Rápido</h3>
+                        <ul class="quick-access-list">
+                            <li class="quick-access-item"><a href="#" data-target="perfil"><span class="material-symbols-outlined">person</span>Ver mi Perfil</a></li>
+                            <li class="quick-access-item"><a href="#" data-target="calificaciones"><span class="material-symbols-outlined">bar_chart</span>Ver Calificaciones</a></li>
+                            <li class="quick-access-item"><a href="#" data-target="calendario"><span class="material-symbols-outlined">calendar_month</span>Calendario Anual</a></li>
+                        </ul>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-delay="400">
+                        <h3><span class="material-symbols-outlined">notifications</span>Notificaciones Recientes</h3>
+                        <ul class="notification-list">
+                            <li class="notification-list-item">
+                                <span class="material-symbols-outlined icon">school</span>
+                                <div><strong>Nueva calificación en Química</strong><div class="time">Hace 30m</div></div>
+                            </li>
+                             <li class="notification-list-item">
+                                <span class="material-symbols-outlined icon">payments</span>
+                                <div><strong>Pago de colegiatura pendiente</strong><div class="time">Ayer</div></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="perfil" class="content-section">
+            <h2>Mi Perfil</h2>
+            <div class="profile-header" data-aos="fade-down">
+                <div class="profile-avatar" id="avatar-container">
+                    <img id="profile-pic" src="https://i.ibb.co/615DoWp/user-placeholder.png" alt="Foto de perfil">
+                    <div class="avatar-overlay">
+                        <span class="material-symbols-outlined">photo_camera</span>
+                        <span>Cambiar</span>
+                    </div>
+                </div>
+                <div>
+                    <h2>Lucas Ramón Lopez Navia</h2>
+                    <p>Matrícula: ISC22290836</p>
+                </div>
+            </div>
+            <form class="profile-form">
+                <input type="file" id="file-upload" accept="image/*" style="display:none;">
+                <div class="card" data-aos="fade-up">
+                    <div class="section-header">
+                        <h3><span class="material-symbols-outlined">contact_page</span>Información de Contacto</h3>
+                        <button type="button" class="btn btn-secondary" id="editProfileBtn"><span class="material-symbols-outlined">edit</span>Editar</button>
+                        <button type="submit" class="btn" id="saveProfileBtn" style="display:none;"><span class="material-symbols-outlined">save</span>Guardar</button>
+                    </div>
+                    <div class="grid-2">
+                        <div class="form-group"><label for="email">Email</label><input type="email" id="email" value="lucasjr.lopez.navia@gmail.com" disabled></div>
+                        <div class="form-group"><label for="telefono">Teléfono</label><input type="tel" id="telefono" value="+52 341 136 5669" disabled></div>
+                        <div class="form-group" style="grid-column: 1 / -1;"><label for="direccion">Dirección</label><input type="text" id="direccion" value="Humboltd #263, Ciudad Guzmán, Jalisco" disabled></div>
+                    </div>
+                </div>
+                <div class="card" data-aos="fade-up" style="margin-top: var(--space-lg);">
+                    <h3><span class="material-symbols-outlined">school</span>Información Académica</h3>
+                    <div class="grid-2">
+                        <div class="form-group"><label for="carrera">Carrera</label><input type="text" id="carrera" value="Sistemas Computacionales" disabled></div>
+                        <div class="form-group"><label for="semestre">Semestre</label><input type="text" id="semestre" value="7º Semestre" disabled></div>
+                        <div class="form-group"><label for="grupo">Grupo</label><input type="text" id="grupo" value="7X-B" disabled></div>
+                        <div class="form-group"><label for="tutor">Tutor Académico</label><input type="text" id="tutor" value="Elva Cardenas" disabled></div>
+                    </div>
+                </div>
+            </form>
+            <div class="card" data-aos="fade-up" style="margin-top: var(--space-lg);">
+                <h3><span class="material-symbols-outlined">lock</span>Seguridad</h3>
+                <form id="passwordChangeForm">
+                    <div class="form-group"><label for="current-password">Contraseña Actual</label><input type="password" id="current-password" required></div>
+                    <div class="form-group"><label for="new-password">Nueva Contraseña</label><input type="password" id="new-password" required></div>
+                    <button type="submit" class="btn">Cambiar Contraseña</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="calificaciones" class="content-section">
+            <h2>Mis Calificaciones</h2>
+            <div class="grades-summary" data-aos="fade-up">
+                <div class="summary-card approved">
+                    <div class="value" id="approved-count">0</div>
+                    <div class="label">Materias Aprobadas</div>
+                </div>
+                <div class="summary-card failed">
+                    <div class="value" id="failed-count">0</div>
+                    <div class="label">Materias Reprobadas</div>
+                </div>
+            </div>
+            <div class="grid-2">
+                 <div class="card" style="text-align:center;" data-aos="fade-up">
+                    <h3><span class="material-symbols-outlined">donut_large</span>Promedio General</h3>
+                    <p style="font-size:2.5rem;font-weight:bold;color:var(--argentinian-blue);">87</p>
+                    <canvas id="averageChart" style="max-width:150px;margin:auto;"></canvas>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <h3><span class="material-symbols-outlined">radar</span>Desempeño por Área</h3>
+                    <div class="chart-container">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="card" style="margin-top:20px;" data-aos="fade-up">
+                  <h3><span class="material-symbols-outlined">show_chart</span>Tendencia Mensual</h3>
+                  <div class="chart-container" style="height: 300px;">
+                    <canvas id="trendChart"></canvas>
+                  </div>
+            </div>
+            <div class="card" style="margin-top:20px;" data-aos="fade-up">
+                <h3><span class="material-symbols-outlined">table_chart</span>Detalle del Semestre</h3>
+                 <div class="filters" data-aos="fade-in" style="margin-bottom: 1rem;">
+                    <button class="btn">Semestre Actual</button>
+                    <button class="btn btn-secondary">Semestre Anterior</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="grades-detail">
+                        <thead><tr><th>Materia</th><th>Parcial 1</th><th>Parcial 2</th><th>Faltas</th><th>Final</th><th>Estatus</th></tr></thead>
+                        <tbody>
+                            <tr><td class="subject-name">Matemáticas</td><td>80</td><td>95</td><td>2</td><td>88</td><td><span class="status-badge status-aprobada">Aprobada</span></td></tr>
+                            <tr><td class="subject-name">Historia</td><td>90</td><td>94</td><td>0</td><td>92</td><td><span class="status-badge status-aprobada">Aprobada</span></td></tr>
+                            <tr><td class="subject-name">Biología</td><td>98</td><td>96</td><td>1</td><td>97</td><td><span class="status-badge status-aprobada">Aprobada</span></td></tr>
+                            <tr><td class="subject-name">Física</td><td>82</td><td>88</td><td>3</td><td>85</td><td><span class="status-badge status-aprobada">Aprobada</span></td></tr>
+                            <tr><td class="subject-name">Química</td><td>78</td><td>70</td><td>5</td><td>74</td><td><span class="status-badge status-reprobada">Reprobada</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="horario" class="content-section">
+            <h2>Horario Semanal</h2>
+            <div class="card" data-aos="fade-up">
+                <div id="weekly-schedule-container"></div>
+            </div>
+        </section>
+
+        <section id="notificaciones" class="content-section">
+            <div class="section-header">
+                <h2>Notificaciones</h2>
+                <button id="clear-notifications-btn" class="btn btn-secondary">Limpiar Todo</button>
+            </div>
+            <div id="notifications-list" data-aos="fade-up"></div>
+        </section>
+
+        <section id="calendario" class="content-section">
+            <h2>Calendario Académico Anual</h2>
+             <div class="card" data-aos="fade-up">
+                <div class="calendar-header">
+                    <button class="btn btn-secondary" id="prevMonthBtn"><span class="material-symbols-outlined">chevron_left</span></button>
+                    <h3 id="monthYear"></h3>
+                    <button class="btn btn-secondary" id="nextMonthBtn"><span class="material-symbols-outlined">chevron_right</span></button>
+                </div>
+                <table class="calendar" id="calendar"></table>
+                <div class="calendar-legend">
+                    <div class="legend-item"><div class="legend-color legend-exam"></div>Examen</div>
+                    <div class="legend-item"><div class="legend-color legend-project"></div>Proyecto</div>
+                    <div class="legend-item"><div class="legend-color legend-extra"></div>Actividad</div>
+                </div>
+             </div>
+        </section>
+        
+        <section id="reinscripciones" class="content-section">
+            <h2>Proceso de Reinscripción</h2>
+            <div class="reinscripcion-grid">
+                <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                    <div class="card" data-aos="fade-up">
+                        <h3><span class="material-symbols-outlined">person_check</span>Estatus de Reinscripción</h3>
+                        <ul class="status-list">
+                            <li><span class="material-symbols-outlined">school</span>Estatus Académico: <span class="status-ok">Regular</span></li>
+                            <li><span class="material-symbols-outlined">payments</span>Adeudos Financieros: <span class="status-ok">Sin adeudos</span></li>
+                            <li><span class="material-symbols-outlined">folder_shared</span>Documentación: <span class="status-error">Pendiente</span></li>
+                        </ul>
+                    </div>
+                    <div class="card" data-aos="fade-up" data-aos-delay="100">
+                        <h3><span class="material-symbols-outlined">upload_file</span>Carga de Documentos</h3>
+                        <p style="font-size: 0.9rem; color: var(--paynes-gray); margin-top: -8px; margin-bottom: 16px;">Sube los documentos requeridos en formato PDF.</p>
+                        <ul class="document-upload-list">
+                            <li class="document-upload-item">
+                                <div>
+                                    <span>Ficha de Reinscripción</span>
+                                    <div class="file-name" id="doc-ficha-status">No se ha cargado archivo.</div>
+                                </div>
+                                <button class="btn btn-secondary" onclick="document.getElementById('doc-ficha').click()">Seleccionar</button>
+                            </li>
+                            <li class="document-upload-item">
+                                <div>
+                                    <span>Comprobante de Pago</span>
+                                    <div class="file-name" id="doc-pago-status">No se ha cargado archivo.</div>
+                                </div>
+                                <button class="btn btn-secondary" onclick="document.getElementById('doc-pago').click()">Seleccionar</button>
+                            </li>
+                        </ul>
+                        <input type="file" id="doc-ficha" style="display:none;" accept=".pdf">
+                        <input type="file" id="doc-pago" style="display:none;" accept=".pdf">
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                     <div class="card" data-aos="fade-up" data-aos-delay="200">
+                        <h3><span class="material-symbols-outlined">format_list_numbered</span>Pasos a Seguir</h3>
+                        <ol class="steps-list">
+                            <li>Realiza el pago de reinscripción para el próximo semestre.</li>
+                            <li>Sube toda la documentación requerida.</li>
+                            <li>Una vez confirmado pago y documentos, tu carga de materias se asignará.</li>
+                        </ol>
+                        <button class="btn" style="width:100%; margin-top: var(--space-md);" onclick="openSection('pagos')"><span class="material-symbols-outlined">payment</span>Ir a Pagos</button>
+                    </div>
+                     <div class="card" data-aos="fade-up" data-aos-delay="300">
+                        <h3><span class="material-symbols-outlined">calendar_month</span>Fechas Importantes</h3>
+                         <ul class="date-list">
+                            <li><strong>Periodo de reinscripción:</strong> <span>01 Ago - 15 Ago 2025</span></li>
+                            <li><strong>Fecha límite de pago:</strong> <span>15 de Agosto, 2025</span></li>
+                            <li><strong>Inicio de clases:</strong> <span>25 de Agosto, 2025</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pagos" class="content-section">
+            <h2>Estado de Cuenta</h2>
+            <div class="payments-summary" data-aos="fade-up">
+                <div class="summary-box paid">Pagado<p id="total-paid">$0.00</p></div>
+                <div class="summary-box due">Pendiente<p id="total-due">$0.00</p></div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3><span class="material-symbols-outlined">pending_actions</span>Pagos Pendientes</h3>
+                <div style="overflow-x:auto;">
+                    <table class="payments-detail">
+                        <thead>
+                            <tr><th>Concepto</th><th>Fecha Límite</th><th>Monto</th><th>Acciones</th></tr>
+                        </thead>
+                        <tbody id="pending-payments-body">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200" style="margin-top: var(--space-lg);">
+                <h3><span class="material-symbols-outlined">history</span>Historial de Pagos</h3>
+                <div style="overflow-x:auto;">
+                     <table class="payments-detail">
+                        <thead>
+                            <tr><th>Concepto</th><th>Fecha de Pago</th><th>Monto</th><th>Estatus</th><th></th></tr>
+                        </thead>
+                        <tbody id="paid-payments-body">
+                             </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="ayuda" class="content-section">
+            <h2>Centro de Ayuda</h2>
+            <div class="card" data-aos="fade-up">
+                <div class="accordion">
+                     <div class="accordion-item">
+                        <button class="accordion-header">¿Cómo cambio mi foto de perfil?<span class="material-symbols-outlined">expand_more</span></button>
+                        <div class="accordion-content"><p>Ve a la sección "Perfil" y simplemente haz clic en tu imagen actual. Se abrirá una ventana para que selecciones una nueva foto desde tu dispositivo.</p></div>
+                    </div>
+                    <div class="accordion-item">
+                        <button class="accordion-header">¿Cómo edito mi perfil?<span class="material-symbols-outlined">expand_more</span></button>
+                        <div class="accordion-content"><p>En la sección "Perfil", haz clic en el botón "Editar". Esto habilitará los campos de contacto para que puedas actualizarlos. Cuando termines, haz clic en "Guardar" para aplicar los cambios. La información académica no se puede editar.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="eventModal" class="modal"><div class="modal-content"><div class="modal-header"><h3 id="modalTitle"></h3><button class="modal-close" onclick="closeModal('eventModal')">&times;</button></div><div id="modalBody"></div></div></div>
+    <div id="paymentModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Realizar Pago</h3><button class="modal-close" onclick="closeModal('paymentModal')">&times;</button></div><div id="paymentModalBody"></div></div></div>
+    <div id="receiptModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Detalles del Recibo</h3><button class="modal-close" onclick="closeModal('receiptModal')">&times;</button></div><div id="receiptModalBody"></div></div></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/scriptestudiantes.js" defer></script>
+</body>
+</html>
