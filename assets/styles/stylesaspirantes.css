@@ -1,0 +1,188 @@
+/* Estilos para la página de aspirantes */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --aspirante-primary: #008080; /* Un color verde azulado/teal */
+    --aspirante-secondary: #f0f8ff; /* AliceBlue, un fondo muy claro */
+    --text-dark: #333;
+    --text-light: #f9f9f9;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--aspirante-secondary);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    padding: 30px 40px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--aspirante-primary);
+    padding-bottom: 20px;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+header h1 {
+    color: var(--aspirante-primary);
+    margin: 0;
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 30px;
+}
+
+.info-card, .form-card {
+    background-color: #fdfdfd;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--aspirante-primary);
+    margin-top: 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.info-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-card li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.info-card .material-symbols-outlined {
+    color: var(--aspirante-primary);
+}
+
+.dates-card .date-item {
+    margin-bottom: 15px;
+}
+.dates-card .date-item p {
+    margin: 0;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--aspirante-primary);
+}
+
+.form-card button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--aspirante-primary);
+    color: var(--text-light);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-card button:hover {
+    background-color: #006666;
+}
+
+.form-message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    display: none; /* Oculto por defecto */
+}
+.form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    display: block;
+}
+.form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    display: block;
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--aspirante-primary);
+    font-weight: 600;
+}
+
+/* Diseño Responsivo */
+@media (max-width: 900px) {
+    .grid-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+    .form-card {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
+    .form-card {
+        grid-column: auto;
+    }
+}
