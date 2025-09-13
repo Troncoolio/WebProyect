@@ -6,6 +6,7 @@
     <title>Portal del Personal - CBTA 19</title>
     <link rel="icon" type="image/png" href="assets/styles/img/logo.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="assets/styles/stylespersonal.css">
 </head>
 <body>
@@ -106,6 +107,29 @@
                 </div>
                 <button type="submit" class="btn">Publicar Anuncio</button>
             </form>
+        </div>
+    </div>
+    
+    <div id="studentProfileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Perfil del Estudiante</h3>
+                <button class="modal-close" id="closeProfileModalBtn">&times;</button>
+            </div>
+            <div class="profile-card-container">
+                <img src="" alt="Foto del estudiante" id="modalStudentPhoto" class="profile-photo">
+                <div class="profile-info">
+                    <h2 id="modalStudentName"></h2>
+                    <p id="modalStudentId"></p>
+                </div>
+            </div>
+            <div class="profile-details">
+                <h4>Información de Contacto</h4>
+                <p><strong>Email:</strong> <span id="modalStudentEmail"></span></p>
+                <p><strong>Teléfono:</strong> <span id="modalStudentPhone"></span></p>
+                <h4>Datos Académicos</h4>
+                <p><strong>Asistencia General:</strong> <span id="modalStudentAttendance"></span></p>
+            </div>
         </div>
     </div>
 
