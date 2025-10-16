@@ -12,6 +12,11 @@ body, html {
   height: 100%; 
   background: var(--uranian-blue); /* 60% color base */
   display: flex; justify-content: center; align-items: center; 
+  /* --- AÑADE ESTAS LÍNEAS --- */
+    -webkit-user-select: none; /* Safari, Chrome */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Estándar global */
 }
 
 /* Pantalla de carga */
@@ -114,4 +119,23 @@ form button:hover {
 .error-message {
   color: #e63946; font-size: 14px; margin-bottom: 15px; text-align: center;
   display: none;
+}
+
+/* --- Estilos para el botón de ver contraseña --- */
+.input-group {
+  position: relative; /* Necesario para posicionar el ícono dentro */
+}
+
+.icon-toggle {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.icon-toggle:hover {
+  color: #333;
 }
