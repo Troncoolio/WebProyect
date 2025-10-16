@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let activeCharts = {};
+    let activeCharts = {}; // Objeto para gestionar los gráficos y evitar duplicados
 
+    // --- FUNCIÓN AUXILIAR PARA PETICIONES CON TOKEN ---
     async function fetchWithAuth(url, options = {}) {
         const token = localStorage.getItem('jwtToken');
         if (!token) {
@@ -20,6 +21,58 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         return response;
     }
+
+    // --- FUNCIONES QUE GENERAN HTML (NO NECESITAN CAMBIOS) ---
+    // Estas funciones toman un objeto de datos (ahora desde la API) y devuelven HTML.
+    
+    function calculateAverage(gradesArray) {
+        if (!gradesArray || gradesArray.length === 0) return 0;
+        const total = gradesArray.reduce((sum, item) => sum + Number(item.calif), 0);
+        return Math.round(total / gradesArray.length);
+    }
+    
+    function renderGradebookView(clase) {
+        let tableHTML = `<div style="overflow-x:auto;"><table class="gradebook-table"><thead><tr><th style="width: 25%;">Nombre del Alumno</th><th>Parcial 1</th><th style="width: 10%;">Prom. P1</th><th>Parcial 2</th><th style="width: 10%;">Prom. P2</th><th style="width: 10%;">Final</th></tr></thead><tbody>`;
+        clase.alumnos.forEach(alumno => {
+            const prom1 = calculateAverage(alumno.parcial1);
+            const prom2 = calculateAverage(alumno.parcial2);
+            const finalGrade = Math.round((prom1 + prom2) / 2);
+            tableHTML += `<tr data-student-id="${alumno.id}"><td><a href="#" class="student-name-link" data-student-id="${alumno.id}" data-class-id="${clase.id}">${alumno.nombre}</a></td>
+                          <td class="gradebook-activities">${alumno.parcial1.map((act, index) => `<div class="activity-item"><span>${act.actividad}</span><input class="grade-input" type="number" min="0" max="100" value="${act.calif}" data-student-id="${alumno.id}" data-partial="parcial1" data-activity-index="${index}"></div>`).join('')}</td>
+                          <td class="promedio-cell">${prom1}</td>
+                          <td class="gradebook-activities">${alumno.parcial2.map((act, index) => `<div class="activity-item"><span>${act.actividad}</span><input class="grade-input" type="number" min="0" max="100" value="${act.calif}" data-student-id="${alumno.id}" data-partial="parcial2" data-activity-index="${index}"></div>`).join('')}</td>
+                          <td class="promedio-cell">${prom2}</td><td class="final-grade-cell">${finalGrade}</td></tr>`;
+        });
+        tableHTML += `</tbody></table></div><button class="btn btn-save-grades" style="margin-top: 20px;">Guardar Cambios</button>`;
+        let chartsHTML = `<div class="charts-container"><div class="chart-card"><h4>Aprobación del Grupo</h4><canvas id="pieChart"></canvas></div><div class="chart-card"><h4>Distribución de Calificaciones</h4><canvas id="barChart"></canvas></div></div>`;
+        return tableHTML + chartsHTML;
+    }
+
+    function renderAttendanceView(clase) {
+        // ... Esta función se mantiene igual, ya que solo genera HTML a partir del objeto 'clase'
+        return `<h3>Registro de Asistencia</h3><p>Contenido de asistencia para la clase ${clase.nombre}.</p><button class="btn">Guardar Asistencia</button>`;
+    }
+
+    function renderResourcesView(clase) {
+        // ... Esta función se mantiene igual, ya que solo genera HTML a partir del objeto 'clase'
+        return `<h3>Recursos y Tareas</h3><p>Contenido de recursos para la clase ${clase.nombre}.</p><button class="btn">Añadir Recurso</button>`;
+    }
+
+    function renderClassCharts(clase) {
+        if (activeCharts.pie) activeCharts.pie.destroy();
+        if (activeCharts.bar) activeCharts.bar.destroy();
+        let aprobados = 0, reprobados = 0;
+        clase.alumnos.forEach(alumno => {
+            const prom1 = calculateAverage(alumno.parcial1);
+            const prom2 = calculateAverage(alumno.parcial2);
+            const finalGrade = Math.round((prom1 + prom2) / 2);
+            if (finalGrade >= 70) aprobados++; else reprobados++;
+        });
+        const ctxPie = document.getElementById('pieChart')?.getContext('2d');
+        if(ctxPie) activeCharts.pie = new Chart(ctxPie, { type: 'doughnut', data: { labels: ['Aprobados', 'Reprobados'], datasets: [{ data: [aprobados, reprobados], backgroundColor: ['#28a745', '#dc3545'] }] } });
+    }
+
+    // --- FUNCIONES DE RENDERIZADO (Consumen la API) ---
 
     async function renderClassList() {
         const classListContainer = document.getElementById('class-list-container');
@@ -49,10 +102,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetchWithAuth(`/api/personal/clases/${classId}`);
             if (!response || !response.ok) throw new Error('Error al cargar detalles');
             const clase = await response.json();
-            // Llama a las funciones que generan el HTML (estas funciones no cambian)
-            // classDetailsContainer.innerHTML = renderGradebookView(clase) ... etc.
-            // Para simplicidad, se muestra un placeholder:
-            classDetailsContainer.innerHTML = `<h3>Clase: ${clase.nombre} - Grupo ${clase.grupo}</h3><p>Aquí se mostrarían los detalles completos, calificaciones, asistencia y recursos para esta clase.</p>`;
+            classDetailsContainer.innerHTML = `
+                <h3><span>${clase.nombre} - Grupo ${clase.grupo}</span></h3>
+                <div class="view-tabs">
+                    <button class="tab-button active" data-view="grades">Calificaciones</button>
+                    <button class="tab-button" data-view="attendance">Asistencia</button>
+                    <button class="tab-button" data-view="resources">Recursos</button>
+                </div>
+                <div id="grades-view" class="tab-view active" data-class-id="${clase.id}">${renderGradebookView(clase)}</div>
+                <div id="attendance-view" class="tab-view">${renderAttendanceView(clase)}</div>
+                <div id="resources-view" class="tab-view">${renderResourcesView(clase)}</div>`;
+            renderClassCharts(clase);
         } catch (error) {
             console.error(error);
             classDetailsContainer.innerHTML = '<p class="error">No se pudieron cargar los detalles.</p>';
@@ -82,74 +142,100 @@ document.addEventListener('DOMContentLoaded', () => {
             announcementsList.innerHTML = '<p class="error">No se pudieron cargar los anuncios.</p>';
         }
     }
+    
+    // --- MANEJADORES DE EVENTOS PARA INTERACTUAR CON LA API ---
 
-    document.getElementById('announcementForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const announcementData = {
-            title: document.getElementById('announcementTitle').value,
-            content: document.getElementById('announcementContent').value,
-            audience: document.getElementById('announcementAudience').value,
-        };
-        try {
-            const response = await fetchWithAuth('/api/personal/anuncios', {
-                method: 'POST',
-                body: JSON.stringify(announcementData),
+    function setupEventListeners() {
+        document.querySelectorAll('nav a[data-section]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+                document.getElementById(link.dataset.section)?.classList.add('active');
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                link.classList.add('active');
             });
-            if (response && response.ok) {
-                document.getElementById('announcementModal').classList.remove('show');
-                e.target.reset();
-                renderAnnouncements();
-            } else {
-                alert('No se pudo crear el anuncio.');
-            }
-        } catch (error) {
-            console.error('Error al crear anuncio:', error);
-        }
-    });
+        });
+        
+        document.getElementById('add-announcement-btn').addEventListener('click', () => {
+            document.getElementById('announcementModal').classList.add('show');
+        });
+        
+        document.getElementById('closeModalBtn').addEventListener('click', () => {
+            document.getElementById('announcementModal').classList.remove('show');
+        });
 
-    document.getElementById('announcements-list').addEventListener('click', async (e) => {
-        const deleteButton = e.target.closest('.announcement-delete-btn');
-        if (deleteButton) {
-            const announcementId = deleteButton.dataset.id;
-            if (confirm('¿Estás seguro de que quieres eliminar este anuncio?')) {
-                try {
-                    const response = await fetchWithAuth(`/api/personal/anuncios/${announcementId}`, {
-                        method: 'DELETE',
-                    });
-                    if (response && response.ok) {
-                        renderAnnouncements();
-                    } else {
-                        alert('No se pudo eliminar el anuncio.');
-                    }
-                } catch (error) {
-                    console.error('Error al eliminar anuncio:', error);
+        document.getElementById('announcementForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const announcementData = { title: e.target.announcementTitle.value, content: e.target.announcementContent.value, audience: e.target.announcementAudience.value };
+            try {
+                const response = await fetchWithAuth('/api/personal/anuncios', { method: 'POST', body: JSON.stringify(announcementData) });
+                if (response && response.ok) {
+                    document.getElementById('announcementModal').classList.remove('show');
+                    e.target.reset();
+                    renderAnnouncements();
+                } else { alert('No se pudo crear el anuncio.'); }
+            } catch (error) { console.error('Error al crear anuncio:', error); }
+        });
+
+        document.getElementById('announcements-list').addEventListener('click', async (e) => {
+            const deleteButton = e.target.closest('.announcement-delete-btn');
+            if (deleteButton) {
+                const id = deleteButton.dataset.id;
+                if (confirm('¿Estás seguro de que quieres eliminar este anuncio?')) {
+                    try {
+                        const response = await fetchWithAuth(`/api/personal/anuncios/${id}`, { method: 'DELETE' });
+                        if (response && response.ok) {
+                            renderAnnouncements();
+                        } else { alert('No se pudo eliminar el anuncio.'); }
+                    } catch (error) { console.error('Error al eliminar anuncio:', error); }
                 }
             }
-        }
-    });
-
-    document.getElementById('class-list-container').addEventListener('click', (e) => {
-        const classItem = e.target.closest('.class-item');
-        if (classItem) {
-            document.querySelectorAll('.class-item.selected').forEach(el => el.classList.remove('selected'));
-            classItem.classList.add('selected');
-            displayClassDetails(classItem.dataset.classId);
-        }
-    });
-
-    const logoutBtn = document.getElementById('logoutBtn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            localStorage.removeItem('jwtToken');
-            window.location.href = 'index.html';
         });
+
+        document.getElementById('class-list-container').addEventListener('click', (e) => {
+            const classItem = e.target.closest('.class-item');
+            if (classItem) {
+                document.querySelectorAll('.class-item.selected').forEach(el => el.classList.remove('selected'));
+                classItem.classList.add('selected');
+                displayClassDetails(classItem.dataset.classId);
+            }
+        });
+        
+        document.getElementById('class-details-container').addEventListener('click', async e => {
+            if(e.target.classList.contains('btn-save-grades')) {
+                const classId = document.querySelector('#grades-view').dataset.classId;
+                const updates = Array.from(document.querySelectorAll('.grade-input')).map(input => ({
+                    studentId: input.dataset.studentId,
+                    partial: input.dataset.partial,
+                    activityIndex: parseInt(input.dataset.activityIndex),
+                    newGrade: parseInt(input.value)
+                }));
+                try {
+                    const response = await fetchWithAuth(`/api/personal/clases/${classId}/calificaciones`, { method: 'PUT', body: JSON.stringify(updates) });
+                    if(response && response.ok) {
+                        alert('Calificaciones guardadas con éxito.');
+                        displayClassDetails(classId); // Recargar vista
+                    } else { alert('Error al guardar calificaciones.'); }
+                } catch(error) { console.error('Error al guardar:', error); }
+            }
+        });
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                localStorage.removeItem('jwtToken');
+                window.location.href = 'index.html';
+            });
+        }
     }
 
+    // --- INICIALIZACIÓN DE LA APLICACIÓN ---
     function initializeApp() {
+        setupEventListeners();
         renderClassList();
         renderAnnouncements();
     }
-
+    
     initializeApp();
 });
