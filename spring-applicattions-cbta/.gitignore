@@ -31,3 +31,35 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Archivos de sistema
+.DS_Store
+*.class
+*.log
+
+# Archivos de compilación
+/target/
+/build/
+
+# Configuración de IDE
+.vscode/
+.idea/
+*.iml
+
+# Maven
+.mvn/
+mvnw.cmd
+mvnw
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+
+# Dependencias
+*.jar
+*.war
+*.ear
+
+# Sistema operativo
+Thumbs.db
