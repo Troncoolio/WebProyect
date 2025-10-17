@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal del Personal - CBTA 19</title>
+    <link rel="icon" type="image/png" href="assets/styles/img/logo.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/styles/stylespersonal.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <header><h1>CBTA19</h1></header>
+        <nav>
+            <a href="#" class="active" data-section="inicio"><span class="material-symbols-outlined">dashboard</span>Inicio</a>
+            <a href="#" data-section="clases"><span class="material-symbols-outlined">class</span>Mis Clases</a>
+            <a href="#" data-section="horario"><span class="material-symbols-outlined">calendar_view_week</span>Horario</a>
+            <a href="#" data-section="anuncios"><span class="material-symbols-outlined">campaign</span>Anuncios</a>
+            <a href="#" id="logoutBtn"><span class="material-symbols-outlined">logout</span>Cerrar Sesión</a>
+        </nav>
+        <footer>© 2025 CBTA19</footer>
+    </aside>
+
+    <main class="main">
+        <section id="inicio" class="content-section active">
+            <div class="greeting">
+                <h2>Bienvenida, Prof. Elva Cardenas 👋</h2>
+                <p>Aquí tienes un resumen de tus actividades.</p>
+            </div>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <span class="material-symbols-outlined icon">class</span>
+                    <div class="value">2</div><div class="label">Clases Hoy</div>
+                </div>
+                <div class="summary-card">
+                    <span class="material-symbols-outlined icon">groups</span>
+                    <div class="value">64</div><div class="label">Estudiantes Totales</div>
+                </div>
+                <div class="summary-card">
+                    <span class="material-symbols-outlined icon">campaign</span>
+                    <div class="value">3</div><div class="label">Anuncios Activos</div>
+                </div>
+            </div>
+             <div class="card" style="margin-top: 24px;">
+                <h3><span class="material-symbols-outlined">quick_reference</span> Atajos Rápidos</h3>
+                <div class="quick-links">
+                    <a href="#" data-section="clases">Ver mis clases</a>
+                    <a href="#" data-section="anuncios">Crear un anuncio</a>
+                    <a href="#" data-section="horario">Consultar horario</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="clases" class="content-section">
+            <h2>Mis Clases</h2>
+            <div class="clases-layout">
+                <div class="card" id="class-list-container">
+                    </div>
+                <div class="card" id="class-details-container">
+                    <p class="placeholder">Selecciona una clase para ver los detalles de los estudiantes.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="horario" class="content-section">
+            <h2>Mi Horario Semanal</h2>
+            <div class="card">
+                <div id="personal-schedule-container">
+                    </div>
+            </div>
+        </section>
+
+        <section id="anuncios" class="content-section">
+            <div class="section-header">
+                <h2>Gestor de Anuncios</h2>
+                <button class="btn" id="add-announcement-btn"><span class="material-symbols-outlined">add</span> Crear Nuevo Anuncio</button>
+            </div>
+            <div id="announcements-list">
+                </div>
+        </section>
+    </main>
+
+    <div id="announcementModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Crear Nuevo Anuncio</h3>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="announcementForm">
+                <div class="form-group">
+                    <label for="announcementTitle">Título</label>
+                    <input type="text" id="announcementTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="announcementContent">Contenido</label>
+                    <textarea id="announcementContent" rows="5" required></textarea>
+                </div>
+                 <div class="form-group">
+                    <label for="announcementAudience">Dirigido a:</label>
+                    <select id="announcementAudience">
+                        <option value="Todos">Todos los Grupos</option>
+                        <option value="7X-A">Grupo 7X-A</option>
+                        <option value="7X-B">Grupo 7X-B</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Publicar Anuncio</button>
+            </form>
+        </div>
+    </div>
+    
+    <div id="studentProfileModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Perfil del Estudiante</h3>
+                <button class="modal-close" id="closeProfileModalBtn">&times;</button>
+            </div>
+            <div class="profile-card-container">
+                <img src="" alt="Foto del estudiante" id="modalStudentPhoto" class="profile-photo">
+                <div class="profile-info">
+                    <h2 id="modalStudentName"></h2>
+                    <p id="modalStudentId"></p>
+                </div>
+            </div>
+            <div class="profile-details">
+                <h4>Información de Contacto</h4>
+                <p><strong>Email:</strong> <span id="modalStudentEmail"></span></p>
+                <p><strong>Teléfono:</strong> <span id="modalStudentPhone"></span></p>
+                <h4>Datos Académicos</h4>
+                <p><strong>Asistencia General:</strong> <span id="modalStudentAttendance"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/scriptpersonal.js"></script>
+</body>
+</html>

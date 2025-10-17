@@ -1,0 +1,199 @@
+/* --- VARIABLES Y ESTILOS BASE --- */
+:root {
+    --paynes-gray: #545e75; --argentinian-blue: #63adf2; --uranian-blue: #a7cced;
+    --yinmn-blue: #304d6d; --air-superiority-blue: #82a0bc; --bg-light: #f0f4f8;
+    --text-light: #2d3748; --card-light: #ffffff;
+    --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --space-md: 16px; --space-lg: 24px;
+    --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.07);
+    /* --- Colores específicos para Personal --- */
+    --personal-primary: #6d28d9; --personal-secondary: #ede9fe; --danger: #ef4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-base);
+    background: var(--bg-light);
+    color: var(--text-light);
+    min-height: 100vh;
+    display: flex;
+    transition: background 0.4s, color 0.4s;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* --- ESTRUCTURA PRINCIPAL (SIDEBAR Y MAIN) --- */
+.sidebar { width: 250px; position: fixed; top: 0; bottom: 0; left: 0; background: var(--yinmn-blue); color: white; padding: var(--space-lg) var(--space-md); display: flex; flex-direction: column; justify-content: space-between; z-index: 1001; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+.main { margin-left: 250px; padding: var(--space-lg); flex: 1; }
+nav a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin: 6px 0; border-radius: 8px; color: white; text-decoration: none; font-weight: 500; transition: 0.3s; }
+nav a:hover, nav a.active { background: var(--personal-primary); transform: translateX(5px); }
+.card { background: var(--card-light); border-radius: 15px; padding: var(--space-md); box-shadow: var(--shadow-sm); }
+h2 { font-size: 2rem; font-weight: 700; margin-bottom: var(--space-lg); padding-bottom: var(--space-md); color: var(--personal-primary); border-bottom: 2px solid var(--personal-primary); }
+.greeting { margin-bottom: var(--space-lg); }
+.greeting h2 { padding-bottom: 8px; border-bottom: 2px solid var(--personal-primary); }
+.greeting p { font-size: 1.1rem; color: var(--paynes-gray); margin-top: 8px; }
+.content-section { display: none; animation: fadeIn 0.5s; }
+.content-section.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.btn { background: var(--personal-primary); color: white; border: none; border-radius: 8px; padding: 10px 15px; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: background-color 0.3s; }
+.btn:hover { background-color: #5b21b6; }
+
+/* --- Estilos de Inicio del Personal --- */
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.summary-card { background-color: var(--card-light); border-radius: 15px; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; box-shadow: var(--shadow-sm); border-left: 5px solid var(--personal-primary); }
+.summary-card .icon { font-size: 48px; color: var(--personal-primary); }
+.summary-card .value { font-size: 2.5rem; font-weight: 700; margin: 8px 0; }
+.summary-card .label { font-size: 1rem; color: var(--paynes-gray); }
+.quick-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.quick-links a { background-color: var(--personal-secondary); color: var(--personal-primary); padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; transition: transform 0.2s; }
+.quick-links a:hover { transform: translateY(-2px); }
+
+/* --- Estilos de "Mis Clases" y Gradebook --- */
+.clases-layout { display: grid; grid-template-columns: 1fr 3fr; gap: 24px; align-items: flex-start; }
+#class-list-container .class-item { padding: 15px; margin-bottom: 10px; border-radius: 8px; border-left: 4px solid var(--air-superiority-blue); cursor: pointer; transition: background-color 0.3s, border-left-color 0.3s; }
+#class-list-container .class-item:hover, #class-list-container .class-item.selected { background-color: var(--personal-secondary); border-left-color: var(--personal-primary); }
+#class-details-container .placeholder { text-align: center; padding: 50px; color: var(--paynes-gray); }
+.student-name-link { cursor: pointer; font-weight: 600; color: var(--yinmn-blue); text-decoration: none; }
+.student-name-link:hover { color: var(--personal-primary); text-decoration: underline; }
+.gradebook-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.gradebook-table th, .gradebook-table td { padding: 10px; border: 1px solid var(--uranian-blue); text-align: center; vertical-align: middle; }
+.gradebook-table thead th { background-color: var(--personal-secondary); color: var(--personal-primary); font-weight: 600; }
+.gradebook-activities { text-align: left; padding: 5px; }
+.activity-item { display: flex; justify-content: space-between; align-items: center; padding: 4px 8px; border-bottom: 1px solid #f0f0f0; }
+.activity-item:last-child { border-bottom: none; }
+.activity-item input { width: 50px; padding: 4px; border-radius: 4px; border: 1px solid #ccc; text-align: center; }
+.activity-item input:focus { border-color: var(--personal-primary); outline: none; }
+.promedio-cell { font-weight: bold; background-color: #f8fafc; }
+.final-grade-cell { font-weight: bold; font-size: 1.1rem; background-color: var(--personal-secondary); color: var(--personal-primary); }
+
+/* --- Estilos de Horario --- */
+.day-block { margin-bottom: var(--space-lg); }
+.day-block h3 { border-bottom: 2px solid var(--personal-primary); padding-bottom: 8px; font-size: 1.2rem; }
+.class-list { list-style: none; padding: 0; margin-top: var(--space-md); }
+.class-item-horario { display: flex; align-items: stretch; background-color: #f8fafc; border-radius: 10px; margin-bottom: 12px; box-shadow: var(--shadow-sm); border-left: 5px solid var(--yinmn-blue); }
+.class-time { flex: 0 0 100px; display: flex; align-items: center; justify-content: center; padding: var(--space-md); font-weight: 700; color: var(--yinmn-blue); border-right: 1px solid #e2e8f0; }
+.class-details { flex-grow: 1; padding: var(--space-md); }
+
+/* --- Estilos de Anuncios --- */
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-md); }
+.announcement-card { background: #fff; border-radius: 8px; box-shadow: var(--shadow-sm); padding: 20px; margin-bottom: 20px; border-left: 5px solid var(--personal-primary); position: relative; }
+.announcement-card h3 { margin-top: 0; }
+.announcement-card p { margin-bottom: 15px; }
+.announcement-meta { font-size: 0.85rem; color: var(--paynes-gray); }
+.announcement-delete-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: var(--paynes-gray); cursor: pointer; font-size: 24px; }
+.announcement-delete-btn:hover { color: var(--danger); }
+
+
+/* --- Estilos del Modal --- */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1100; }
+.modal.show { display: flex; }
+.modal-content { background: var(--card-light); padding: var(--space-lg); border-radius: 15px; width: 90%; max-width: 500px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 12px; }
+.modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--paynes-gray); }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+
+/* --- Estilos del Modal de Perfil de Alumno --- */
+.profile-card-container { display: flex; align-items: center; gap: 20px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid #eee; }
+.profile-photo { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--personal-primary); }
+.profile-info h2 { border-bottom: none; margin: 0; padding: 0; font-size: 1.8rem; }
+.profile-info p { font-size: 1rem; color: var(--paynes-gray); }
+.profile-details h4 { color: var(--personal-primary); margin-top: 0; margin-bottom: 10px; }
+.profile-details p { margin: 5px 0; }
+
+/* --- Estilos para la actualización automática del Gradebook --- */
+@keyframes flash { 0% { background-color: var(--personal-secondary); } 100% { background-color: #f8fafc; } }
+.promedio-cell.updated, .final-grade-cell.updated { animation: flash 0.8s ease-out; }
+
+/* --- Estilos para Pestañas y Asistencia --- */
+.view-tabs { display: flex; border-bottom: 2px solid #ccc; margin-bottom: 20px; }
+.tab-button { padding: 10px 20px; cursor: pointer; border: none; background-color: transparent; font-size: 1rem; font-weight: 600; color: var(--paynes-gray); border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.tab-button.active { color: var(--personal-primary); border-bottom-color: var(--personal-primary); }
+.tab-view { display: none; }
+.tab-view.active { display: block; }
+.attendance-table { width: 100%; border-collapse: collapse; }
+.attendance-table th, .attendance-table td { padding: 12px; border-bottom: 1px solid var(--uranian-blue); text-align: left; vertical-align: middle; }
+.attendance-status-buttons button { border: 1px solid #ccc; background-color: #f0f0f0; color: #333; padding: 5px 12px; margin-right: 5px; border-radius: 15px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+.attendance-status-buttons button.selected.asistencia { background-color: #28a745; color: white; border-color: #28a745;}
+.attendance-status-buttons button.selected.falta { background-color: #dc3545; color: white; border-color: #dc3545;}
+.attendance-status-buttons button.selected.retardo { background-color: #ffc107; color: black; border-color: #ffc107;}
+.attendance-summary-card { display: flex; gap: 20px; background-color: var(--personal-secondary); padding: 15px; border-radius: 8px; margin-bottom: 20px; justify-content: space-around; }
+.summary-item { text-align: center; }
+.summary-item .count { font-size: 1.8rem; font-weight: 700; }
+.summary-item .label { font-size: 0.9rem; color: var(--paynes-gray); }
+.summary-item .count.asistencia { color: #28a745; }
+.summary-item .count.falta { color: #dc3545; }
+.summary-item .count.retardo { color: #b58500; }
+.attendance-summary-cell span { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; color: white; margin-right: 4px; }
+.summary-badge.asistencia { background-color: #28a745; }
+.summary-badge.falta { background-color: #dc3545; }
+.summary-badge.retardo { background-color: #ffc107; color: black; }
+
+/* --- ESTILOS MEJORADOS PARA GESTOR DE RECURSOS Y TAREAS --- */
+.resources-view-container { display: grid; grid-template-columns: 320px 1fr; gap: 24px; align-items: flex-start; }
+.resource-form-card, .resource-list-card { padding: 20px; border-radius: 12px; background-color: #fff; box-shadow: var(--shadow-sm); }
+.resource-form-card h4 { margin-top: 0; color: var(--personal-primary); border-bottom: 1px solid #eee; padding-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+#resource-form .btn { width: 100%; margin-top: 10px; }
+.resource-list { list-style: none; padding: 0; margin: 0; max-height: 450px; overflow-y: auto; }
+.resource-card { background-color: #f8fafc; border-radius: 8px; padding: 15px; margin-bottom: 15px; border-left: 4px solid var(--yinmn-blue); display: flex; flex-direction: column; gap: 8px; }
+.resource-header { display: flex; justify-content: space-between; align-items: center; }
+.resource-header h5 { margin: 0; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: var(--yinmn-blue); }
+.resource-card p { font-size: 0.9rem; color: #555; margin: 0 0 0 34px; word-break: break-all; }
+.resource-card .meta { font-size: 0.85rem; font-weight: 600; color: var(--personal-primary); margin: 5px 0 0 34px; display: flex; align-items: center; gap: 8px; }
+.resource-delete-btn { background: none; border: none; color: var(--paynes-gray); cursor: pointer; padding: 5px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s, color 0.2s; }
+.resource-delete-btn:hover { background-color: #fee2e2; color: var(--danger); }
+.form-group.hidden { display: none; }
+.file-name-display { font-size: 0.8rem; color: var(--paynes-gray); margin-top: 5px; display: block; }
+
+/* --- Diseño Responsivo --- */
+@media (max-width: 900px) {
+    .clases-layout, .resources-view-container { grid-template-columns: 1fr; }
+    .main { margin-left: 0; }
+    .sidebar { display: none; }
+}
+
+.section-header h2 {
+    flex-grow: 1; /* Para que ocupe el espacio disponible a la izquierda del botón */
+    border-bottom: 2px solid var(--personal-primary); /* Le aplicamos la línea completa */
+    padding-bottom: var(--space-md); /* Le damos espacio */
+    margin-bottom: 0; /* Evitamos el doble margen con su contenedor */
+}
+
+.section-header h2 > span {
+    border-bottom: none; /* Le quitamos la línea corta que tenía el span */
+    padding-bottom: 0;
+}
+
+/* --- Estilos para las Gráficas de Desempeño --- */
+.charts-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* El de pastel más pequeño, el de barras más grande */
+    gap: 24px;
+    margin-top: 24px;
+    align-items: center;
+}
+
+.chart-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.chart-card h4 {
+    margin-top: 0;
+    text-align: center;
+    color: var(--yinmn-blue);
+}
+
+/* Responsividad para las gráficas */
+@media (max-width: 1100px) {
+    .charts-container {
+        grid-template-columns: 1fr; /* Una sobre otra en pantallas más pequeñas */
+    }
+}
