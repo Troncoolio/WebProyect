@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="assets/styles/stylesestudiantes.css">
+    <link rel="stylesheet" href="/styles/stylesestudiantes.css" th:href="@{/styles/stylesestudiantes.css}">
 </head>
 <body>
 
@@ -345,6 +345,6 @@
     <div id="receiptModal" class="modal"><div class="modal-content"><div class="modal-header"><h3>Detalles del Recibo</h3><button class="modal-close" onclick="closeModal('receiptModal')">&times;</button></div><div id="receiptModalBody"></div></div></div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="assets/js/scriptestudiantes.js" defer></script>
+    <script src="/js/scriptestudiantes.js" th:src="@{/js/scriptestudiantes.js}" defer></script>
 </body>
 </html>

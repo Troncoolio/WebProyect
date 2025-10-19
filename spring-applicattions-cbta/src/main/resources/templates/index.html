@@ -4,25 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GradeBox • CBTA 19</title>
-  <link rel="icon" type="image/png" href="assets/styles/img/logo.jpg">
+  <link rel="icon" type="image/png" href="/styles/img/logo.jpg" th:href="@{/styles/img/logo.jpg}">
 
   <!-- Google Material Symbols -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="assets/styles/styles.css">
+  <link rel="stylesheet" href="/styles/styles.css" th:href="@{/styles/styles.css}">
 </head>
 <body>
   <!-- Pantalla de carga -->
   <div id="loader">
-    <img src="assets/styles/img/logo2.png" alt="Logo">
+  <img src="/styles/img/logo2.png" alt="Logo" th:src="@{/styles/img/logo2.png}">
     <div class="spinner"></div>
   </div>
 
   <!-- Contenedor principal -->
   <div class="container">
-    <img src="assets/styles/img/logo2.png" alt="Logo" class="logo">
-    <div class="tagline">"Aprender es crecer, y crecer es nuestra misión diaria"</div>
+    <img src="/styles/img/logo2.png" alt="Logo" class="logo">
+    <div class="tagline">"Enseñar haciendo y aprender produciendo"</div>
 
     <div class="tabs">
       <button class="active" data-role="estudiante">Estudiante</button>
@@ -50,6 +50,6 @@
   </div>
 
   <!-- JS -->
-  <script src="assets/js/script.js"></script>
+  <script src="/js/script.js" th:src="@{/js/script.js}"></script>
 </body>
 </html>
