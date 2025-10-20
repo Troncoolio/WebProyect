@@ -71,7 +71,7 @@ window.addEventListener('load', () => {
                         errorMessage.textContent = '¡Acceso correcto! Redirigiendo...';
                         errorMessage.style.backgroundColor = '#10b981';
                         errorMessage.style.display = 'block';
-                        setTimeout(() => { window.location.href = 'estudiantes.html'; }, 1000);
+                        setTimeout(() => { window.location.href = '/estudiantes'; }, 1000); 
                     } else {
                         errorMessage.textContent = 'Número de control o contraseña incorrectos.';
                         errorMessage.style.display = 'block';
@@ -81,18 +81,17 @@ window.addEventListener('load', () => {
                         errorMessage.textContent = '¡Acceso correcto! Redirigiendo al portal de aspirantes...';
                         errorMessage.style.backgroundColor = '#10b981';
                         errorMessage.style.display = 'block';
-                        setTimeout(() => { window.location.href = 'aspirantes.html'; }, 1000);
+                        setTimeout(() => { window.location.href = '/aspirantes'; }, 1000); 
                     } else {
                         errorMessage.textContent = 'Número de Ficha o Código de Acceso incorrectos.';
                         errorMessage.style.display = 'block';
                     }
-                // --- Bloque de validación para Personal ---
                 } else if (selectedRole === 'personal') {
                     if (control === VALID_PERSONAL_USER && password === VALID_PERSONAL_PASS) {
                         errorMessage.textContent = '¡Acceso correcto! Redirigiendo al portal del personal...';
                         errorMessage.style.backgroundColor = '#10b981';
                         errorMessage.style.display = 'block';
-                        setTimeout(() => { window.location.href = 'personal.html'; }, 1000);
+                        setTimeout(() => { window.location.href = '/personal'; }, 1000);
                     } else {
                         errorMessage.textContent = 'Número de empleado o contraseña incorrectos.';
                         errorMessage.style.display = 'block';
@@ -101,27 +100,17 @@ window.addEventListener('load', () => {
             }
         });
 
-        // --- Lógica para Ver/Ocultar Contraseña ---
+        // Lógica para Ver/Ocultar Contraseña
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', () => {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
-                togglePassword.textContent = type === 'password' ? 'visibility' : 'visibility_off';
-            });
-        }
-    }
 
-    // --- Lógica para la Página de Estudiantes ---
-    const studentSidebar = document.querySelector('.sidebar');
-    if (studentSidebar) {
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', (event) => {
-                event.preventDefault();
-                window.location.href = 'index.html'; 
+                togglePassword.textContent = type === 'password' ? 'lock' : 'visibility_off';
             });
         }
     }
 });
+
 
