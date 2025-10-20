@@ -22,7 +22,7 @@ window.addEventListener('load', () => {
                 loader.style.display = 'none';
                 container.classList.add('show');
             }, 500);
-        }, 5000);
+        }, 1500);
 
         const errorMessage = document.getElementById('error');
         const controlInput = document.getElementById('control');
