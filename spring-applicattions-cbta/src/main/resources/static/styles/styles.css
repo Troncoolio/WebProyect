@@ -4,6 +4,7 @@
   --uranian-blue: #a7cced;
   --yinmn-blue: #304d6d;
   --air-superiority-blue: #82a0bc;
+  --space-icon: 22px; /* Espacio para iconos */
 }
 
 /* Reset básico */
@@ -72,21 +73,43 @@ body, html {
 /* Inputs flotantes con iconos */
 .input-group { position: relative; margin-bottom: 20px; width: 100%; }
 .input-group input {
-  width: 100%; padding: 14px 45px 14px 15px; 
+  width: 100%; padding: 14px 45px 14px 15px; /* Padding ajustado a 15px a la izquierda para el control/usuario */
   border: 1px solid var(--yinmn-blue);
   border-radius: 12px; outline: none; font-size: 14px; 
   transition: all 0.3s;
   background: #f9fbfd;
 }
+
+/* Ajuste de padding para el INPUT de la contraseña (para hacer espacio para el ícono a la izquierda) */
+.password-group input {
+    padding: 14px 45px 14px 45px !important; 
+}
+
+
 .input-group label {
   position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
   background: #f9fbfd; padding: 0 5px; color: var(--yinmn-blue); font-size: 14px;
   pointer-events: none; transition: all 0.3s;
 }
+
+/* Ajuste de label para el input de contraseña, para que inicie más a la derecha */
+.password-group label {
+    left: 15px; /* Mueve el label a la derecha del ícono */
+}
+
+
 .input-group input:focus + label,
 .input-group input:not(:placeholder-shown) + label {
   top: -10px; left: 10px; font-size: 12px; color: var(--argentinian-blue);
 }
+
+/* Ajuste de label flotante para la contraseña, para que inicie a la derecha del candado */
+.password-group input:focus + label,
+.password-group input:not(:placeholder-shown) + label {
+  left: 10px; /* Mueve el label flotante para que no colisione con el ícono del candado */
+}
+
+
 .input-group .icon {
   position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
   pointer-events: none;
@@ -96,6 +119,14 @@ body, html {
 .input-group input:focus { 
   border-color: var(--argentinian-blue); 
   box-shadow: 0 0 10px rgba(99,173,242,0.3);
+}
+
+/* --- REGLAS AGREGADAS PARA EL TOGGLE DE CONTRASEÑA --- */
+.input-group .toggle-icon {
+  left: 215px; 
+  right: auto;
+  pointer-events: auto; /* Permite el click sobre el ícono */
+  cursor: pointer;
 }
 
 /* Botón de login */
