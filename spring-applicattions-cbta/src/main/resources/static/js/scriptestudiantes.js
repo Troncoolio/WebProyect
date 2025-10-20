@@ -129,17 +129,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const saveBtn = document.getElementById('saveProfileBtn');
         const editableInputs = document.querySelectorAll('#email, #telefono, #direccion');
         editBtn.addEventListener('click', () => { editableInputs.forEach(input => input.disabled = false); editBtn.style.display = 'none'; saveBtn.style.display = 'flex'; });
+        
         // --- LÓGICA PARA EL BOTÓN DE CERRAR SESIÓN ---
-    const logoutBtn = document.getElementById('logoutBtn');
-    if(logoutBtn) {
-        logoutBtn.addEventListener('click', (event) => {
-            event.preventDefault(); // Previene que el enlace '#' recargue la página
-            
-            // Simula un cierre de sesión y redirige al login
-            //alert("Has cerrado la sesión."); // Opcional: muestra una alerta
-            window.location.href = 'index.html'; // Redirige al inicio de sesión
-        });
-    }
+        const logoutBtn = document.getElementById('logoutBtn');
+        if(logoutBtn) {
+            logoutBtn.addEventListener('click', (event) => {
+                event.preventDefault(); // Previene que el enlace '#' recargue la página
+                
+                window.location.href = '/index'; 
+            });
+        }
+        
         document.querySelector('.profile-form').addEventListener('submit', e => { e.preventDefault(); editableInputs.forEach(input => input.disabled = true); editBtn.style.display = 'flex'; saveBtn.style.display = 'none'; alert('Perfil guardado.'); });
         document.getElementById('avatar-container').addEventListener('click', () => document.getElementById('file-upload').click());
         document.getElementById('file-upload').addEventListener('change', (e) => {
