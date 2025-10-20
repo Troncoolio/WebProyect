@@ -74,8 +74,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- MANEJADORES DE EVENTOS ---
     function setupEventListeners() {
         document.querySelectorAll('nav a[data-section], .quick-links a[data-section]').forEach(link => { link.addEventListener('click', e => { e.preventDefault(); const sectionId = link.dataset.section; document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active')); document.getElementById(sectionId).classList.add('active'); document.querySelectorAll('nav a').forEach(a => a.classList.remove('active')); document.querySelector(`nav a[data-section="${sectionId}"]`)?.classList.add('active'); }); });
+        
         const logoutBtn = document.getElementById('logoutBtn');
-        if(logoutBtn) { logoutBtn.addEventListener('click', e => { e.preventDefault(); window.location.href = 'index.html'; }); }
+        if(logoutBtn) { 
+            logoutBtn.addEventListener('click', e => { 
+                e.preventDefault(); 
+                window.location.href = '/index';
+            }); 
+        }
+        
         classListContainer.addEventListener('click', (e) => { const classItem = e.target.closest('.class-item'); if (classItem) { document.querySelectorAll('.class-item').forEach(i => i.classList.remove('selected')); classItem.classList.add('selected'); displayClassDetails(classItem.dataset.classId); } });
         addAnnouncementBtn.addEventListener('click', () => announcementModal.classList.add('show'));
         closeModalBtn.addEventListener('click', () => announcementModal.classList.remove('show'));
