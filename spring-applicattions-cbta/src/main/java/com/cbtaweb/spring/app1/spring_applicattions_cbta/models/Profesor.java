@@ -2,7 +2,12 @@ package com.cbtaweb.spring.app1.spring_applicattions_cbta.models;
 
 import java.util.List;
 
+import jakarta.persistence.*;
+@Entity
+@Table(name = "profesores")
 public class Profesor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private String apellidos;
