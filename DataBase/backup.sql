@@ -1,0 +1,462 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.17 (Homebrew)
+-- Dumped by pg_dump version 14.17 (Homebrew)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: alumnos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.alumnos (
+    id bigint NOT NULL,
+    ncontrol character varying(25) NOT NULL,
+    nombre character varying(255) NOT NULL,
+    grupo character varying(255),
+    carrera character varying(255),
+    semestre character varying(20) NOT NULL,
+    matricula character varying(255) NOT NULL,
+    n_control character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.alumnos OWNER TO postgres;
+
+--
+-- Name: alumnos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.alumnos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.alumnos_id_seq OWNER TO postgres;
+
+--
+-- Name: alumnos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.alumnos_id_seq OWNED BY public.alumnos.id;
+
+
+--
+-- Name: aspirantes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.aspirantes (
+    id integer NOT NULL,
+    nombre character varying(255) NOT NULL,
+    carrera character varying(100),
+    promedio_previo numeric(3,1),
+    fecha_registro timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    apellidos character varying(255)
+);
+
+
+ALTER TABLE public.aspirantes OWNER TO postgres;
+
+--
+-- Name: aspirantes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.aspirantes_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.aspirantes_id_seq OWNER TO postgres;
+
+--
+-- Name: aspirantes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.aspirantes_id_seq OWNED BY public.aspirantes.id;
+
+
+--
+-- Name: calificaciones; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.calificaciones (
+    id bigint NOT NULL,
+    alumno_id bigint,
+    materia_id bigint,
+    maestro_id integer,
+    calificacion double precision,
+    periodo character varying(50)
+);
+
+
+ALTER TABLE public.calificaciones OWNER TO postgres;
+
+--
+-- Name: calificaciones_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.calificaciones_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.calificaciones_id_seq OWNER TO postgres;
+
+--
+-- Name: calificaciones_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.calificaciones_id_seq OWNED BY public.calificaciones.id;
+
+
+--
+-- Name: maestros; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.maestros (
+    id integer NOT NULL,
+    nombre character varying(100) NOT NULL,
+    especialidad character varying(100)
+);
+
+
+ALTER TABLE public.maestros OWNER TO postgres;
+
+--
+-- Name: maestros_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.maestros_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.maestros_id_seq OWNER TO postgres;
+
+--
+-- Name: maestros_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.maestros_id_seq OWNED BY public.maestros.id;
+
+
+--
+-- Name: materias; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.materias (
+    id bigint NOT NULL,
+    nombre character varying(255) NOT NULL,
+    creditos integer,
+    codigo character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.materias OWNER TO postgres;
+
+--
+-- Name: materias_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.materias_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.materias_id_seq OWNER TO postgres;
+
+--
+-- Name: materias_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.materias_id_seq OWNED BY public.materias.id;
+
+
+--
+-- Name: profesores; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.profesores (
+    id integer NOT NULL,
+    apellidos character varying(255),
+    materias character varying(255)[],
+    nombre character varying(255)
+);
+
+
+ALTER TABLE public.profesores OWNER TO postgres;
+
+--
+-- Name: profesores_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.profesores ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.profesores_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- Name: alumnos id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.alumnos ALTER COLUMN id SET DEFAULT nextval('public.alumnos_id_seq'::regclass);
+
+
+--
+-- Name: aspirantes id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.aspirantes ALTER COLUMN id SET DEFAULT nextval('public.aspirantes_id_seq'::regclass);
+
+
+--
+-- Name: calificaciones id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.calificaciones ALTER COLUMN id SET DEFAULT nextval('public.calificaciones_id_seq'::regclass);
+
+
+--
+-- Name: maestros id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maestros ALTER COLUMN id SET DEFAULT nextval('public.maestros_id_seq'::regclass);
+
+
+--
+-- Name: materias id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.materias ALTER COLUMN id SET DEFAULT nextval('public.materias_id_seq'::regclass);
+
+
+--
+-- Data for Name: alumnos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.alumnos (id, ncontrol, nombre, grupo, carrera, semestre, matricula, n_control) FROM stdin;
+\.
+
+
+--
+-- Data for Name: aspirantes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.aspirantes (id, nombre, carrera, promedio_previo, fecha_registro, apellidos) FROM stdin;
+\.
+
+
+--
+-- Data for Name: calificaciones; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.calificaciones (id, alumno_id, materia_id, maestro_id, calificacion, periodo) FROM stdin;
+\.
+
+
+--
+-- Data for Name: maestros; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.maestros (id, nombre, especialidad) FROM stdin;
+\.
+
+
+--
+-- Data for Name: materias; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.materias (id, nombre, creditos, codigo) FROM stdin;
+\.
+
+
+--
+-- Data for Name: profesores; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.profesores (id, apellidos, materias, nombre) FROM stdin;
+\.
+
+
+--
+-- Name: alumnos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.alumnos_id_seq', 1, false);
+
+
+--
+-- Name: aspirantes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.aspirantes_id_seq', 1, false);
+
+
+--
+-- Name: calificaciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.calificaciones_id_seq', 1, false);
+
+
+--
+-- Name: maestros_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.maestros_id_seq', 1, false);
+
+
+--
+-- Name: materias_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.materias_id_seq', 1, false);
+
+
+--
+-- Name: profesores_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.profesores_id_seq', 1, false);
+
+
+--
+-- Name: alumnos alumnos_ncontrol_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.alumnos
+    ADD CONSTRAINT alumnos_ncontrol_key UNIQUE (ncontrol);
+
+
+--
+-- Name: alumnos alumnos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.alumnos
+    ADD CONSTRAINT alumnos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: aspirantes aspirantes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.aspirantes
+    ADD CONSTRAINT aspirantes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: calificaciones calificaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.calificaciones
+    ADD CONSTRAINT calificaciones_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: maestros maestros_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.maestros
+    ADD CONSTRAINT maestros_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: materias materias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.materias
+    ADD CONSTRAINT materias_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: profesores profesores_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.profesores
+    ADD CONSTRAINT profesores_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: alumnos uk5gwahtmg4m46qqeqsr6dqyrg4; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.alumnos
+    ADD CONSTRAINT uk5gwahtmg4m46qqeqsr6dqyrg4 UNIQUE (n_control);
+
+
+--
+-- Name: alumnos ukbqkabo0plhxx8h9g3skgnql8n; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.alumnos
+    ADD CONSTRAINT ukbqkabo0plhxx8h9g3skgnql8n UNIQUE (matricula);
+
+
+--
+-- Name: calificaciones calificaciones_alumno_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.calificaciones
+    ADD CONSTRAINT calificaciones_alumno_id_fkey FOREIGN KEY (alumno_id) REFERENCES public.alumnos(id) ON DELETE CASCADE;
+
+
+--
+-- Name: calificaciones calificaciones_maestro_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.calificaciones
+    ADD CONSTRAINT calificaciones_maestro_id_fkey FOREIGN KEY (maestro_id) REFERENCES public.maestros(id) ON DELETE SET NULL;
+
+
+--
+-- Name: calificaciones calificaciones_materia_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.calificaciones
+    ADD CONSTRAINT calificaciones_materia_id_fkey FOREIGN KEY (materia_id) REFERENCES public.materias(id) ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
