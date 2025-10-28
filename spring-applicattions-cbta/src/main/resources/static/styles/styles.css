@@ -4,14 +4,13 @@
   --uranian-blue: #a7cced;
   --yinmn-blue: #304d6d;
   --air-superiority-blue: #82a0bc;
-  --space-icon: 22px; /* Espacio para iconos */
 }
 
 /* Reset básico */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", sans-serif; }
 body, html { 
   height: 100%; 
-  background: var(--uranian-blue); /* 60% color base */
+  background: var(--uranian-blue); 
   display: flex; justify-content: center; align-items: center; 
 }
 
@@ -19,7 +18,7 @@ body, html {
 #loader {
   position: fixed; top: 0; left: 0;
   width: 100%; height: 100%;
-  background: var(--yinmn-blue); /* secundario */
+  background: var(--yinmn-blue); 
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   z-index: 1000; transition: opacity 0.5s ease;
 }
@@ -28,7 +27,7 @@ body, html {
 .spinner {
   width: 50px; height: 50px;
   border: 5px solid rgba(255,255,255,0.4); 
-  border-top: 5px solid var(--argentinian-blue); /* acento */
+  border-top: 5px solid var(--argentinian-blue); 
   border-radius: 50%; animation: spin 1s linear infinite;
 }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -45,11 +44,7 @@ body, html {
   padding: 40px; align-items: center;
 }
 .container.show { opacity: 1; transform: scale(1); visibility: visible; }
-
-/* Logo */
 .logo { width: 220px; margin-bottom: 20px; }
-
-/* Frase inspiradora */
 .tagline {
   text-align: center; font-size: 16px; 
   color: var(--yinmn-blue); margin-bottom: 30px;
@@ -66,70 +61,73 @@ body, html {
   color: #fff; font-weight: bold; cursor: pointer; transition: all 0.3s;
 }
 .tabs button.active, .tabs button:hover {
-  background: var(--argentinian-blue); /* acento */
+  background: var(--argentinian-blue); 
   color: #fff; transform: translateY(-2px);
 }
 
 /* Inputs flotantes con iconos */
 .input-group { position: relative; margin-bottom: 20px; width: 100%; }
+
 .input-group input {
-  width: 100%; padding: 14px 45px 14px 15px; /* Padding ajustado a 15px a la izquierda para el control/usuario */
+  width: 100%; 
   border: 1px solid var(--yinmn-blue);
   border-radius: 12px; outline: none; font-size: 14px; 
   transition: all 0.3s;
   background: #f9fbfd;
 }
 
-/* Ajuste de padding para el INPUT de la contraseña (para hacer espacio para el ícono a la izquierda) */
-.password-group input {
-    padding: 14px 45px 14px 45px !important; 
-}
-
-
 .input-group label {
-  position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+  position: absolute; top: 50%; transform: translateY(-50%);
   background: #f9fbfd; padding: 0 5px; color: var(--yinmn-blue); font-size: 14px;
   pointer-events: none; transition: all 0.3s;
 }
 
-/* Ajuste de label para el input de contraseña, para que inicie más a la derecha */
-.password-group label {
-    left: 15px; /* Mueve el label a la derecha del ícono */
-}
-
-
-.input-group input:focus + label,
-.input-group input:not(:placeholder-shown) + label {
-  top: -10px; left: 10px; font-size: 12px; color: var(--argentinian-blue);
-}
-
-/* Ajuste de label flotante para la contraseña, para que inicie a la derecha del candado */
-.password-group input:focus + label,
-.password-group input:not(:placeholder-shown) + label {
-  left: 10px; /* Mueve el label flotante para que no colisione con el ícono del candado */
-}
-
-
-.input-group .icon {
-  position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--argentinian-blue);
-  font-size: 22px;
-}
 .input-group input:focus { 
   border-color: var(--argentinian-blue); 
   box-shadow: 0 0 10px rgba(99,173,242,0.3);
 }
 
-/* --- REGLAS AGREGADAS PARA EL TOGGLE DE CONTRASEÑA --- */
-.input-group .toggle-icon {
-  left: 215px; 
-  right: auto;
-  pointer-events: auto; /* Permite el click sobre el ícono */
+.input-group .icon-right {
+  position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--argentinian-blue);
+  font-size: 22px;
+}
+.input-group input.has-icon-right {
+  padding: 14px 45px 14px 15px;
+}
+
+.input-group input.has-icon-right + label {
+  left: 15px;
+}
+.input-group input.has-icon-right:focus + label,
+.input-group input.has-icon-right:not(:placeholder-shown) + label {
+  top: -10px; left: 10px; font-size: 12px; color: var(--argentinian-blue);
+}
+
+.input-group .icon-left {
+  position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--argentinian-blue);
+  font-size: 22px;
+}
+.input-group input.has-icon-left {
+  padding: 14px 15px 14px 45px;
+}
+
+.input-group input.has-icon-left + label {
+  left: 45px; 
+}
+.input-group input.has-icon-left:focus + label,
+.input-group input.has-icon-left:not(:placeholder-shown) + label {
+  top: -10px; left: 10px; font-size: 12px; color: var(--argentinian-blue);
+}
+
+#togglePassword {
+  pointer-events: auto;
   cursor: pointer;
 }
 
-/* Botón de login */
 form button {
   width: 100%; padding: 14px;
   background: var(--yinmn-blue);
@@ -141,8 +139,16 @@ form button:hover {
   transform: translateY(-2px); 
 }
 
-/* Mensaje de error */
 .error-message {
-  color: #e63946; font-size: 14px; margin-bottom: 15px; text-align: center;
   display: none;
+}
+.error-message.show {
+  display: block;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
 }
