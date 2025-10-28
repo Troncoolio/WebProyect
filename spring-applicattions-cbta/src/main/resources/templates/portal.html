@@ -11,7 +11,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    <link rel="icon" th:href="@{/img/logocbta19.jpg}" type="image/jpeg">
+    <link rel="icon" th:href="@{/styles/img/logocbta19.jpg}" type="image/jpeg">
     
     <link rel="stylesheet" th:href="@{/styles/stylesportal.css}">
 </head>
@@ -19,7 +19,7 @@
 
     <header>
         <div class="logo-container">
-            <img th:src="@{/img/logocbta19.jpg}" alt="Logo CBTA 19" class="logo-img">
+            <img th:src="@{/styles/img/logocbta19.jpg}" alt="Logo CBTA 19" class="logo-img">
             <h1 class="site-title">CBTA No. 19</h1>
         </div>
         
@@ -60,7 +60,7 @@
             <div class="noticias-grid">
                 <article>
                     <video class="video-lazy-play" muted loop playsinline>
-                        <source th:src="@{/img/calaverita.mp4}" type="video/mp4">
+                        <source th:src="@{/styles/img/calaverita.mp4}" type="video/mp4">
                         Tu navegador no soporta el elemento de video.
                     </video>
 
@@ -71,7 +71,7 @@
                     </div>
                 </article>
                 <article>
-                    <img th:src="@{/img/atletismo.jpg}" alt="Imagen de la noticia">
+                    <img th:src="@{/styles/img/atletismo.jpg}" alt="Imagen de la noticia">
                     <div class="noticia-contenido">
                         <h4><a href="#">Competrencia de atletismo</a></h4>
                         <p>Comprometidos con el deporte realizamos la competencia interna de Atletismo...</p>
@@ -79,7 +79,7 @@
                     </div>
                 </article>
                 <article>
-                    <img th:src="@{/img/oratoria.jpg}" alt="Imagen de la noticia">
+                    <img th:src="@{/styles/img/oratoria.jpg}" alt="Imagen de la noticia">
                     <div class="noticia-contenido">
                         <h4><a href="#">Concurso de Oratoria</a></h4>
                         <p>Se realizo la premiación del concurso de oratoria..</p>
@@ -93,10 +93,10 @@
             <h3>Galería</h3>
             <p>Un vistazo a la vida en el CBTA 19.</p>
             <div class="galeria-grid">
-                <img th:src="@{/img/evento.jpg}" alt="Foto de evento">
-                <img th:src="@{/img/instalaciones.jpg}" alt="Foto de instalaciones">
-                <img th:src="@{/img/alumnos.jpg}" alt="Foto de alumnos">
-                <img th:src="@{/img/practica.jpg}" alt="Foto de práctica">
+                <img th:src="@{/styles/img/evento.jpg}" alt="Foto de evento">
+                <img th:src="@{/styles/img/instalaciones.jpg}" alt="Foto de instalaciones">
+                <img th:src="@{/styles/img/alumnos.jpg}" alt="Foto de alumnos">
+                <img th:src="@{/styles/img/practica.jpg}" alt="Foto de práctica">
             </div>
         </section>
 
@@ -109,7 +109,7 @@
                 Descargar Calendario (PDF)
             </a>
 
-            <img th:src="@{/img/calendario.jpg}" alt="Calendario Escolar 2025-2026">
+            <img th:src="@{/styles/img/calendario.jpg}" alt="Calendario Escolar 2025-2026">
         
         </section>
 
@@ -117,7 +117,53 @@
 
     
     <footer id="contacto">
-        </footer>
+        
+        <div class="footer-columna">
+            <h4>Contacto</h4>
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Dirección: Pirul, Sayula, Jalisco, 48050</span>
+            </p>
+            <p>
+                <i class="fa-solid fa-map-pin"></i>
+                <a href="https://maps.app.goo.gl/VUJpKCni2RHzdkCX7" target="_blank" rel="noopener noreferrer">Ver en Google Maps</a>
+            </p>
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                <span>Teléfono: 01 342 422 0458</span>
+            </p>
+        </div>
+
+        <div class="footer-columna">
+            <h4>Horario de Atención</h4>
+            <p>
+                <i class="fa-solid fa-clock"></i>
+                <span>lunes a viernes: 7:00–15:00</span>
+            </p>
+            <p>
+                <i class="fa-solid fa-shop-slash"></i>
+                <span>sábado y domingo: Cerrado</span>
+            </p>
+        </div>
+        
+        <div class="footer-columna footer-social">
+            <h4>Síguenos</h4>
+            <p>
+            <a href="https://www.facebook.com/p/Cbta-19-Sayula-100068240312678/?locale=es_LA" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-facebook"></i> Facebook
+            </a>
+            </p>
+            <p>
+            <a href="https://www.instagram.com/cbta19oficial/?hl=es" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            </p>
+        </div>
+        
+        <div class="footer-copy">
+            <p>© 2025. Centro de Bachillerato Tecnológico Agropecuario No. 19</p>
+        </div>
+    </footer>
     
     <script th:src="@{/js/app.js}"></script>
 
