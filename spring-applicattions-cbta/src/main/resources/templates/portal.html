@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBTA No. 19 - Inicio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="icon" th:href="@{/styles/img/logocbta19.jpg}" type="image/jpeg">
+    
+    <link rel="stylesheet" th:href="@{/styles/stylesportal.css}">
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img th:src="@{/styles/img/logocbta19.jpg}" alt="Logo CBTA 19" class="logo-img">
+            <h1 class="site-title">CBTA No. 19</h1>
+        </div>
+        
+        <input type="checkbox" id="menu-toggle">
+        <label for="menu-toggle" class="menu-icon">
+            <span class="line"></span>
+            <span class="line"></span>
+            <span class="line"></span>
+        </label>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#inicio">Inicio</a></li> 
+                <li><a href="#quienes-omos">Quiénes Somos</a></li>
+                <li><a href="#oferta-educativa">Oferta Educativa</a></li>
+                <li><a href="#noticias">Noticias</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#calendario">Calendario</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                
+                <li><a th:href="@{/index}">Portal Estudiantil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        
+        <section class="hero" id="inicio">
+            <div class="hero-content">
+                <h2>Bienvenidos al Centro de Bachillerato Tecnológico Agropecuario No. 19</h2>
+                <p>Formando técnicos profesionales con pasión por el campo y la tecnología.</p>
+                <a href="#oferta-educativa" class="cta-button">Conoce Nuestra Oferta</a>
+            </div>
+        </section>
+
+        <section class="seccion seccion-clara animate-on-scroll" id="quienes-omos">
+            <h3>Nuestra Identidad</h3>
+            
+            <div class="quienes-somos-content">
+                <div class="mision-vision">
+                    <h4>Misión</h4>
+                    <p>Ofrecer una educación integral y de calidad en el nivel medio superior tecnológico, formando profesionales técnicos capaces de contribuir al desarrollo sostenible del sector agropecuario y de la región.</p>
+                </div>
+                
+                <div class="mision-vision">
+                    <h4>Visión</h4>
+                    <p>Ser una institución líder en la formación tecnológica y agropecuaria en el estado, reconocida por la excelencia académica, la innovación y el compromiso social de sus egresados.</p>
+                </div>
+                
+                <div class="valores">
+                    <h4>Valores</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-star"></i> Responsabilidad</li>
+                        <li><i class="fa-solid fa-star"></i> Liderazgo</li>
+                        <li><i class="fa-solid fa-star"></i> Compromiso Ambiental</li>
+                        <li><i class="fa-solid fa-star"></i> Integridad</li>
+                    </ul>
+                </div>
+            </div>
+            
+            </section>
+        
+        <section class="seccion animate-on-scroll" id="oferta-educativa">
+            <h3>Nuestra Oferta Educativa</h3>
+            <p>Formamos técnicos listos para el futuro. Elige la carrera que impulsará tu talento.</p>
+            
+            <div class="oferta-grid">
+                
+                <article class="carrera-card">
+                    <i class="fa-solid fa-hand-holding-dollar carrera-icon"></i>
+                    <h4>Técnico en Administración para el Emprendimiento Agropecuario</h4>
+                    <p>Desarrolla habilidades en gestión de negocios, contabilidad y planes de emprendimiento aplicados al sector agropecuario.</p>
+                </article>
+
+                <article class="carrera-card">
+                    <i class="fa-solid fa-apple-whole carrera-icon"></i>
+                    <h4>Técnico en Producción Industrial de Alimentos</h4>
+                    <p>Aprende a transformar y conservar materias primas, asegurando la calidad e inocuidad en la industria alimentaria.</p>
+                </article>
+
+                <article class="carrera-card">
+                    <i class="fa-solid fa-laptop-code carrera-icon"></i>
+                    <h4>Técnico en Ofimática</h4>
+                    <p>Domina las herramientas de software, la gestión de información y la administración de recursos ofimáticos en entornos empresariales.</p>
+                </article>
+
+                <article class="carrera-card">
+                    <i class="fa-solid fa-fan carrera-icon"></i>
+                    <h4>Técnico en Agricultura Protegida</h4>
+                    <p>Especialízate en el manejo y producción de cultivos bajo estructuras protegidas como invernaderos, mallas y túneles.</p>
+                </article>
+                
+                <article class="carrera-card">
+                    <i class="fa-solid fa-seedling carrera-icon"></i>
+                    <h4>Técnico en Agropecuario</h4>
+                    <p>Adquiere competencias en la producción agrícola y pecuaria, aplicando tecnologías sustentables para el manejo de cultivos y ganado.</p>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="seccion seccion-clara animate-on-scroll" id="noticias">
+            <h3>Últimas Noticias</h3>
+            <div class="noticias-grid">
+                <article>
+                    <video class="video-lazy-play" muted loop playsinline>
+                        <source th:src="@{/styles/img/calaverita.mp4}" type="video/mp4">
+                        Tu navegador no soporta el elemento de video.
+                    </video>
+
+                    <div class="noticia-contenido">
+                        <h4><a href="#">Concurso de calaveritas literarias</a></h4>
+                        <p>#Somos ocelotes...</p>
+                        <span>Publicado: 23 Oct, 2025</span>
+                    </div>
+                </article>
+                <article>
+                    <img th:src="@{/styles/img/atletismo.jpg}" alt="Imagen de la noticia">
+                    <div class="noticia-contenido">
+                        <h4><a href="#">Competrencia de atletismo</a></h4>
+                        <p>Comprometidos con el deporte realizamos la competencia interna de Atletismo...</p>
+                        <span>Publicado: 22 Oct, 2025</span>
+                    </div>
+                </article>
+                <article>
+                    <img th:src="@{/styles/img/oratoria.jpg}" alt="Imagen de la noticia">
+                    <div class="noticia-contenido">
+                        <h4><a href="#">Concurso de Oratoria</a></h4>
+                        <p>Se realizo la premiación del concurso de oratoria..</p>
+                        <span>Publicado: 30 Sep, 2025</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="seccion animate-on-scroll" id="galeria">
+            <h3>Galería</h3>
+            <p>Un vistazo a la vida en el CBTA 19.</p>
+            <div class="galeria-grid">
+                <img th:src="@{/styles/img/evento.jpg}" alt="Foto de evento">
+                <img th:src="@{/styles/img/instalaciones.jpg}" alt="Foto de instalaciones">
+                <img th:src="@{/styles/img/alumnos.jpg}" alt="Foto de alumnos">
+                <img th:src="@{/styles/img/practica.jpg}" alt="Foto de práctica">
+            </div>
+        </section>
+
+        <section class="seccion animate-on-scroll" id="calendario">
+            <h3>Calendario Escolar</h3>
+            <p>Consulta el calendario oficial en formato PDF o míralo en la imagen a continuación.</p>
+            
+            <a href="https://dgb.sep.gob.mx/storage/recursos/2024/09/mU4JATbZ2p-Calendario_24-25%20final.pdf" class="ver-mas" target="_blank" rel="noopener noreferrer">
+                <i class="fa-solid fa-file-pdf"></i>
+                Descargar Calendario (PDF)
+            </a>
+
+            <img th:src="@{/styles/img/calendario.jpg}" alt="Calendario Escolar 2025-2026">
+        
+        </section>
+
+        </main>
+
+    
+    <footer id="contacto">
+        
+        <div class="footer-columna">
+            <h4>Contacto</h4>
+            <p>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Dirección: Pirul, Sayula, Jalisco, 48050</span>
+            </p>
+            <p>
+                <i class="fa-solid fa-map-pin"></i>
+                <a href="https://maps.app.goo.gl/BASkE1TWrbpNdKPo9" target="_blank" rel="noopener noreferrer">Ver en Google Maps</a>
+            </p>
+            <p>
+                <i class="fa-solid fa-phone"></i>
+                <span>Teléfono: 01 342 422 0458</span>
+            </p>
+        </div>
+
+        <div class="footer-columna">
+            <h4>Horario de Atención</h4>
+            <p>
+                <i class="fa-solid fa-clock"></i>
+                <span>lunes a viernes: 7:00–15:00</span>
+            </p>
+            <p>
+                <i class="fa-solid fa-shop-slash"></i>
+                <span>sábado y domingo: Cerrado</span>
+            </p>
+        </div>
+        
+        <div class="footer-columna footer-social">
+            <h4>Síguenos</h4>
+            <p>
+            <a href="https://www.facebook.com/p/Cbta-19-Sayula-100068240312678/?locale=es_LA" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-facebook"></i> Facebook
+            </a>
+            </p>
+            <p>
+            <a href="https://www.instagram.com/cbta19oficial/?hl=es" target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-instagram"></i> Instagram
+            </a>
+            </p>
+        </div>
+        
+        <div class="footer-copy">
+            <p>© 2025. Centro de Bachillerato Tecnológico Agropecuario No. 19</p>
+        </div>
+    </footer>
+    
+    <script th:src="@{/js/app.js}"></script>
+
+</body>
+</html>
