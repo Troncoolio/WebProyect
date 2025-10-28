@@ -26,4 +26,8 @@ public class ViewController {
         return "personal";
     }
 
+    @GetMapping("/portal")
+    public String mostrarPortal() {
+        return "portal";
+    } 
 }
