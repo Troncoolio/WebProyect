@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Alumnos</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" th:href="@{/styles/admin-styles.css}">
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Panel de Administración de Alumnos</h1>
+        
+        <div class="admin-container">
+            
+            <div class="card form-section">
+                
+                <h3 th:if="${alumnoForm.id == null}">
+                    <i class="fa-solid fa-plus"></i>
+                    Agregar Nuevo Alumno
+                </h3>
+                <h3 th:unless="${alumnoForm.id == null}">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Editando Alumno
+                </h3>
+                
+                <form th:action="@{/admin/alumnos/guardar}" th:object="${alumnoForm}" method="POST">
+                    
+                    <input type="hidden" th:field="*{id}" />
+                    
+                    <div>
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" th:field="*{nombre}" id="nombre" placeholder="Nombre del alumno" required>
+                    </div>
+
+                    <div>
+                        <label for="apellido">Apellido:</label>
+                        <input type="text" th:field="*{apellido}" id="apellido" placeholder="Apellido del alumno" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fa-solid fa-check"></i>
+                        Guardar Alumno
+                    </button>
+                    
+                    <a th:if="${alumnoForm.id != null}" th:href="@{/admin/alumnos}" class="btn btn-cancel" style="justify-content: center;">
+                        <i class="fa-solid fa-xmark"></i>
+                        Cancelar Edición
+                    </a>
+                </form>
+                
+            </div>
+
+            <div class="card list-section">
+                <h3>
+                    <i class="fa-solid fa-list"></i>
+                    Lista de Alumnos Actuales
+                </h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="alu : ${alumnos}">
+                            <td th:text="${alu.id}">1</td>
+                            <td th:text="${alu.nombre}">Ana</td>
+                            <td th:text="${alu.apellido}">García</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a th:href="@{/admin/alumnos/editar/{id}(id=${alu.id})}" class="btn btn-edit">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                    <a th:href="@{/admin/alumnos/eliminar/{id}(id=${alu.id})}" class="btn btn-delete">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr th:if="${#lists.isEmpty(alumnos)}">
+                            <td colspan="4" style="text-align: center; color: #777;">
+                                No hay alumnos registrados.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div> <hr style="border: none; border-top: 1px solid var(--border-color); margin-top: 30px;">
+        <a th:href="@{/admin}" class="nav-link">← Volver al Panel Principal</a>
+
+    </div> </body>
+</html>
