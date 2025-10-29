@@ -9,11 +9,6 @@ public class Aspirante {
     private String nombre;  
     private String apellidos;
 
-    public Aspirante(int id, String nombre, String apellidos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-    }
     public int getId() {
         return id;
     }
