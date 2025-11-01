@@ -11,42 +11,49 @@ public class Usuario {
     private String username;
     private String password;
     private String rol;
-
-    private Integer alumno_id;
-    private Integer maestro_id;
-    private Integer administrativo_id;
-    private Integer aspirante_id;
     
-    public Integer getAlumno_id() {
-        return alumno_id;
+    @Column(name="alumno_id")
+    private Integer alumnoId;
+
+    @Column(name="maestro_id")
+    private Integer maestroId;
+
+    @Column(name="administrativo_id")
+    private Integer administrativoId;
+
+    @Column(name="aspirante_id")
+    private Integer aspiranteId;
+
+    public Integer getAlumnoId() {
+        return alumnoId;
     }
 
-    public void setAlumno_id(Integer alumno_id) {
-        this.alumno_id = alumno_id;
+    public void setAlumnoId(Integer alumnoId) {
+        this.alumnoId = alumnoId;
     }
 
-    public Integer getMaestro_id() {
-        return maestro_id;
+    public Integer getMaestroId() {
+        return maestroId;
     }
 
-    public void setMaestro_id(Integer maestro_id) {
-        this.maestro_id = maestro_id;
+    public void setMaestroId(Integer maestroId) {
+        this.maestroId = maestroId;
     }
 
-    public Integer getAdministrativo_id() {
-        return administrativo_id;
+    public Integer getAdministrativoId() {
+        return administrativoId;
     }
 
-    public void setAdministrativo_id(Integer administrativo_id) {
-        this.administrativo_id = administrativo_id;
+    public void setAdministrativoId(Integer administrativoId) {
+        this.administrativoId = administrativoId;
     }
 
-    public Integer getAspirante_id() {
-        return aspirante_id;
+    public Integer getAspiranteId() {
+        return aspiranteId;
     }
 
-    public void setAspirante_id(Integer aspirante_id) {
-        this.aspirante_id = aspirante_id;
+    public void setAspiranteId(Integer aspiranteId) {
+        this.aspiranteId = aspiranteId;
     }
 
     public int getId() {

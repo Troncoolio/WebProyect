@@ -19,7 +19,7 @@ public class AuthService {
     }
         public Optional<Usuario> authenticateAlumnoByNcontrol(String ncontrol, String password, AlumnoRepository alumnoRepo) {
         // Buscar alumno por ncontrol
-        var optAlumno = alumnoRepo.findByNcontrol(ncontrol);
+        var optAlumno = alumnoRepo.findByNControl(ncontrol);
         if (optAlumno.isEmpty()) return Optional.empty();
         Integer alumnoId = optAlumno.get().getId().intValue();
         var optUsuario = usuarioRepo.findByAlumnoId(alumnoId);
