@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" th:href="@{/styles/dashboardstyles.css}">
+
+</head>
+<body>
+
+    <div class="header">
+        <h1>Panel de Administración Central</h1>
+        <p>Selecciona la sección que deseas gestionar.</p>
+    </div>
+
+    <div class="dashboard-grid">
+    
+        <a th:href="@{/admin/profesores}" class="dashboard-card card-profesor">
+            <i class="fa-solid fa-chalkboard-user"></i>
+            <span>Gestionar Profesores</span>
+        </a>
+        
+        <a th:href="@{/admin/alumnos}" class="dashboard-card card-alumno">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Gestionar Alumnos</span>
+        </a>
+        
+        <a th:href="@{/admin/aspirantes}" class="dashboard-card card-aspirante">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Gestionar Aspirantes</span>
+        </a>
+        
+    </div>
+    
+    <hr>
+    <a th:href="@{/portal}" class="nav-link">← Volver al Portal Público</a>
+    
+</body>
+</html>

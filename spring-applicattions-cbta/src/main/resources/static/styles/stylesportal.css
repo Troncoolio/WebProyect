@@ -262,9 +262,12 @@ main {
     text-align: center;
 }
 
-/* ------------------------------------------- */
-/* == ESTILOS SECCIÓN QUIÉNES SOMOS (MEJORADOS) == */
-/* ------------------------------------------- */
+.oferta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
 
 #quienes-omos {
     padding-top: 50px;
@@ -332,10 +335,6 @@ main {
     margin-right: 10px;
     text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); 
 }
-
-/* ------------------------------------------- */
-/* == ESTILOS SECCIÓN OFERTA EDUCATIVA (MEJORADOS) == */
-/* ------------------------------------------- */
 
 .oferta-grid {
     display: grid;
