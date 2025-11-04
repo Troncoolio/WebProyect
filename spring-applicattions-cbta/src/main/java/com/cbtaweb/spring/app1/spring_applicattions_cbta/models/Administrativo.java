@@ -1,18 +1,22 @@
 package com.cbtaweb.spring.app1.spring_applicattions_cbta.models;
+
+import jakarta.persistence.Entity;
 import jakarta.persistence.*;
+
 @Entity
-@Table(name = "aspirantes")
-public class Aspirante {
+@Table(name = "administrativos")
+public class Administrativo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String nombre;  
-    private String apellidos;
+    private Long id;
+    private String nombre;
+    private String puesto;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNombre() {
@@ -21,10 +25,12 @@ public class Aspirante {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getApellido() {
-        return apellidos;
+    public String getPuesto() {
+        return puesto;
     }
-    public void setApellido(String apellidos) {
-        this.apellidos = apellidos;
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
+
+    
 }

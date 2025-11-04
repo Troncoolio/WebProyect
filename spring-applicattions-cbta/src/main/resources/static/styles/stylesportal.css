@@ -269,6 +269,128 @@ main {
     margin-top: 1.5rem;
 }
 
+#quienes-omos {
+    padding-top: 50px;
+}
+
+.quienes-somos-content {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 30px; 
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Estilo Base para las Tarjetas de Misión, Visión y Valores */
+.mision-vision, .valores {
+    flex: 1 1 300px; 
+    padding: 30px;
+    border-radius: var(--borde-radio);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: var(--transicion-suave);
+    background-color: var(--color-blanco);
+    border: 1px solid #e0e0e0;
+}
+
+/* Énfasis visual con un borde distintivo */
+.mision-vision {
+    border-left: 5px solid var(--color-primario);
+}
+.valores {
+    border-left: 5px solid var(--color-acento); 
+}
+
+/* Efecto de Hover Sutil */
+.mision-vision:hover, .valores:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mision-vision h4, .valores h4 {
+    color: var(--color-primario);
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 74, 153, 0.1); 
+}
+
+/* Estilos de la lista de Valores */
+.valores ul {
+    list-style: none;
+    padding: 0;
+}
+
+.valores ul li {
+    margin-bottom: 10px;
+    padding: 5px 0;
+    color: var(--color-texto-oscuro);
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.valores ul li i {
+    color: gold; 
+    font-size: 1.1em;
+    margin-right: 10px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); 
+}
+
+.oferta-grid {
+    display: grid;
+    /* Cuadrícula de 3 columnas en escritorio, adaptable a 5 si el espacio es suficiente */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.carrera-card {
+    background-color: var(--color-blanco);
+    padding: 35px 25px;
+    border-radius: var(--borde-radio);
+    text-align: center;
+    box-shadow: var(--sombra-card);
+    transition: var(--transicion-suave);
+    border: 1px solid #e0e0e0;
+    border-bottom: 5px solid transparent; 
+}
+
+.carrera-card:hover {
+    background-color: #f0f8ff; 
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-card-hover);
+    border-bottom-color: var(--color-secundario); 
+}
+
+.carrera-icon {
+    font-size: 3.8em; 
+    color: var(--color-acento); 
+    margin-bottom: 20px;
+    display: block;
+    transition: var(--transicion-suave);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.carrera-card:hover .carrera-icon {
+    transform: scale(1.1) rotate(-5deg);
+    color: #218838; 
+}
+
+.carrera-card h4 {
+    font-size: 1.45em;
+    color: var(--color-primario);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.carrera-card p {
+    font-size: 1em;
+    color: var(--color-texto-claro);
+    line-height: 1.6;
+}
+/* ------------------------------------------- */
+
+
 .oferta-grid-5 {
     justify-content: center;
 }
@@ -751,6 +873,11 @@ footer {
     }
     .noticia-contenido {
         padding: 1.5rem;
+    }
+    
+    .mision-vision, .valores {
+        flex: 1 1 100%; 
+        padding: 25px;
     }
 
     .footer-columna h4 {
