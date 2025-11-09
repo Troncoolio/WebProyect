@@ -8,10 +8,7 @@ const VALID_PERSONAL_USER = 'D-1024';
 const VALID_PERSONAL_PASS = 'profe123';
 
 
-// Espera a que la página se cargue completamente
 window.addEventListener('load', () => {
-    
-    // --- LÓGICA PARA LA PÁGINA DE LOGIN ---
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         const loader = document.getElementById('loader');
@@ -24,13 +21,11 @@ window.addEventListener('load', () => {
             }, 500);
         }, 1500);
 
-        const errorMessage = document.getElementById('error');
         const controlInput = document.getElementById('control');
         const passwordInput = document.getElementById('password');
         const tabs = document.querySelectorAll('.tabs button');
         let selectedRole = 'estudiante';
 
-        // --- Manejo de Pestañas (Tabs) ---
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                 tabs.forEach(t => t.classList.remove('active'));
@@ -43,71 +38,26 @@ window.addEventListener('load', () => {
                 if (selectedRole === 'estudiante') {
                     controlLabel.textContent = "Número de control";
                     passwordLabel.textContent = "Contraseña";
+                    controlInput.placeholder = " "; 
                 } else if (selectedRole === 'personal') {
                     controlLabel.textContent = "Número de empleado";
                     passwordLabel.textContent = "Contraseña";
+                    controlInput.placeholder = " ";
                 } else if (selectedRole === 'aspirante') {
                     controlLabel.textContent = "Número de Ficha";
                     passwordLabel.textContent = "Código de Acceso";
+                    controlInput.placeholder = " ";
                 }
             });
         });
 
-        // --- Lógica del Formulario de Login ---
-        loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const control = controlInput.value.trim();
-            const password = passwordInput.value.trim();
-            errorMessage.style.backgroundColor = '';
 
-            if (control === '' || password === '') {
-                errorMessage.textContent = 'Por favor, complete todos los campos.';
-                errorMessage.style.display = 'block';
-            } else {
-                errorMessage.style.display = 'none';
-                
-                if (selectedRole === 'estudiante') {
-                    if (control === VALID_STUDENT_USER && password === VALID_STUDENT_PASS) {
-                        errorMessage.textContent = '¡Acceso correcto! Redirigiendo...';
-                        errorMessage.style.backgroundColor = '#10b981';
-                        errorMessage.style.display = 'block';
-                        setTimeout(() => { window.location.href = '/estudiantes'; }, 1000); 
-                    } else {
-                        errorMessage.textContent = 'Número de control o contraseña incorrectos.';
-                        errorMessage.style.display = 'block';
-                    }
-                } else if (selectedRole === 'aspirante') {
-                    if (control === VALID_ASPIRANTE_FICHA && password === VALID_ASPIRANTE_CODE) {
-                        errorMessage.textContent = '¡Acceso correcto! Redirigiendo al portal de aspirantes...';
-                        errorMessage.style.backgroundColor = '#10b981';
-                        errorMessage.style.display = 'block';
-                        setTimeout(() => { window.location.href = '/aspirantes'; }, 1000); 
-                    } else {
-                        errorMessage.textContent = 'Número de Ficha o Código de Acceso incorrectos.';
-                        errorMessage.style.display = 'block';
-                    }
-                } else if (selectedRole === 'personal') {
-                    if (control === VALID_PERSONAL_USER && password === VALID_PERSONAL_PASS) {
-                        errorMessage.textContent = '¡Acceso correcto! Redirigiendo al portal del personal...';
-                        errorMessage.style.backgroundColor = '#10b981';
-                        errorMessage.style.display = 'block';
-                        setTimeout(() => { window.location.href = '/personal'; }, 1000);
-                    } else {
-                        errorMessage.textContent = 'Número de empleado o contraseña incorrectos.';
-                        errorMessage.style.display = 'block';
-                    }
-                }
-            }
-        });
-
-        // Lógica para Ver/Ocultar Contraseña
         const togglePassword = document.getElementById('togglePassword');
         if (togglePassword) {
             togglePassword.addEventListener('click', () => {
                 const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
                 passwordInput.setAttribute('type', type);
-
-                togglePassword.textContent = type === 'password' ? 'lock' : 'visibility_off';
+                togglePassword.textContent = type === 'password' ? 'lock' : 'lock_open'; 
             });
         }
     }
